@@ -1,10 +1,5 @@
 package com.comdata.parking.app.web.rest;
 
-import com.comdata.parking.app.ComdataGaricApp;
-import com.comdata.parking.app.domain.User;
-import com.comdata.parking.app.repository.UserRepository;
-import com.comdata.parking.app.security.jwt.TokenProvider;
-import com.comdata.parking.app.web.rest.vm.LoginVM;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -16,6 +11,13 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
+
+import com.comdata.factory.app.ComdataGaricApp;
+import com.comdata.factory.app.domain.User;
+import com.comdata.factory.app.repository.UserRepository;
+import com.comdata.factory.app.security.jwt.TokenProvider;
+import com.comdata.factory.app.web.rest.UserJWTController;
+import com.comdata.factory.app.web.rest.vm.LoginVM;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;

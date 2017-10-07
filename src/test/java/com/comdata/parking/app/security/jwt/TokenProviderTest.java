@@ -1,6 +1,5 @@
 package com.comdata.parking.app.security.jwt;
 
-import com.comdata.parking.app.security.AuthoritiesConstants;
 import io.github.jhipster.config.JHipsterProperties;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -12,6 +11,9 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.test.util.ReflectionTestUtils;
+
+import com.comdata.factory.app.security.AuthoritiesConstants;
+import com.comdata.factory.app.security.jwt.TokenProvider;
 
 import java.util.ArrayList;
 import java.util.Collection;

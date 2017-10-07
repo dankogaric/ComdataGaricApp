@@ -1,6 +1,5 @@
 package com.comdata.parking.app.security.jwt;
 
-import com.comdata.parking.app.security.AuthoritiesConstants;
 import io.github.jhipster.config.JHipsterProperties;
 import org.junit.Before;
 import org.junit.Test;
@@ -12,6 +11,11 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.test.util.ReflectionTestUtils;
+
+import com.comdata.factory.app.security.AuthoritiesConstants;
+import com.comdata.factory.app.security.jwt.JWTConfigurer;
+import com.comdata.factory.app.security.jwt.JWTFilter;
+import com.comdata.factory.app.security.jwt.TokenProvider;
 
 import java.util.Collections;
 

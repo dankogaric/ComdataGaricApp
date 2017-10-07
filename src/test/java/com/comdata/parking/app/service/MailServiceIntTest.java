@@ -1,8 +1,4 @@
 package com.comdata.parking.app.service;
-import com.comdata.parking.app.config.Constants;
-
-import com.comdata.parking.app.ComdataGaricApp;
-import com.comdata.parking.app.domain.User;
 import io.github.jhipster.config.JHipsterProperties;
 import org.junit.Before;
 import org.junit.Test;
@@ -18,6 +14,11 @@ import org.springframework.mail.MailSendException;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.thymeleaf.spring4.SpringTemplateEngine;
+
+import com.comdata.factory.app.ComdataGaricApp;
+import com.comdata.factory.app.config.Constants;
+import com.comdata.factory.app.domain.User;
+import com.comdata.factory.app.service.MailService;
 
 import javax.mail.Multipart;
 import javax.mail.internet.MimeBodyPart;

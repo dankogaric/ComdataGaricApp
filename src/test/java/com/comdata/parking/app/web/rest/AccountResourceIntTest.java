@@ -1,17 +1,4 @@
 package com.comdata.parking.app.web.rest;
-import com.comdata.parking.app.config.Constants;
-
-import com.comdata.parking.app.ComdataGaricApp;
-import com.comdata.parking.app.domain.Authority;
-import com.comdata.parking.app.domain.User;
-import com.comdata.parking.app.repository.AuthorityRepository;
-import com.comdata.parking.app.repository.UserRepository;
-import com.comdata.parking.app.security.AuthoritiesConstants;
-import com.comdata.parking.app.service.MailService;
-import com.comdata.parking.app.service.UserService;
-import com.comdata.parking.app.service.dto.UserDTO;
-import com.comdata.parking.app.web.rest.vm.KeyAndPasswordVM;
-import com.comdata.parking.app.web.rest.vm.ManagedUserVM;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.Before;
 import org.junit.Test;
@@ -28,6 +15,20 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
+
+import com.comdata.factory.app.ComdataGaricApp;
+import com.comdata.factory.app.config.Constants;
+import com.comdata.factory.app.domain.Authority;
+import com.comdata.factory.app.domain.User;
+import com.comdata.factory.app.repository.AuthorityRepository;
+import com.comdata.factory.app.repository.UserRepository;
+import com.comdata.factory.app.security.AuthoritiesConstants;
+import com.comdata.factory.app.service.MailService;
+import com.comdata.factory.app.service.UserService;
+import com.comdata.factory.app.service.dto.UserDTO;
+import com.comdata.factory.app.web.rest.AccountResource;
+import com.comdata.factory.app.web.rest.vm.KeyAndPasswordVM;
+import com.comdata.factory.app.web.rest.vm.ManagedUserVM;
 
 import java.time.Instant;
 import java.time.LocalDate;

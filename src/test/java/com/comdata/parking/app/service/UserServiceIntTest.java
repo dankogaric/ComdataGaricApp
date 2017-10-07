@@ -1,16 +1,19 @@
 package com.comdata.parking.app.service;
 
-import com.comdata.parking.app.ComdataGaricApp;
-import com.comdata.parking.app.domain.User;
-import com.comdata.parking.app.config.Constants;
-import com.comdata.parking.app.repository.UserRepository;
-import com.comdata.parking.app.service.dto.UserDTO;
-import com.comdata.parking.app.service.util.RandomUtil;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
+
+import com.comdata.factory.app.ComdataGaricApp;
+import com.comdata.factory.app.config.Constants;
+import com.comdata.factory.app.domain.User;
+import com.comdata.factory.app.repository.UserRepository;
+import com.comdata.factory.app.service.UserService;
+import com.comdata.factory.app.service.dto.UserDTO;
+import com.comdata.factory.app.service.util.RandomUtil;
+
 import org.springframework.test.context.junit4.SpringRunner;
 
 import org.springframework.data.domain.Page;

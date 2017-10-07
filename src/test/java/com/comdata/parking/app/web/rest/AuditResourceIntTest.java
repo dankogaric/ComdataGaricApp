@@ -1,10 +1,5 @@
 package com.comdata.parking.app.web.rest;
 
-import com.comdata.parking.app.ComdataGaricApp;
-import com.comdata.parking.app.config.audit.AuditEventConverter;
-import com.comdata.parking.app.domain.PersistentAuditEvent;
-import com.comdata.parking.app.repository.PersistenceAuditEventRepository;
-import com.comdata.parking.app.service.AuditEventService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -19,6 +14,13 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
+
+import com.comdata.factory.app.ComdataGaricApp;
+import com.comdata.factory.app.config.audit.AuditEventConverter;
+import com.comdata.factory.app.domain.PersistentAuditEvent;
+import com.comdata.factory.app.repository.PersistenceAuditEventRepository;
+import com.comdata.factory.app.service.AuditEventService;
+import com.comdata.factory.app.web.rest.AuditResource;
 
 import java.time.Instant;
 import java.time.format.DateTimeFormatter;

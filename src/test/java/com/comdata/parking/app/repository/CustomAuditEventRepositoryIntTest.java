@@ -1,9 +1,5 @@
 package com.comdata.parking.app.repository;
 
-import com.comdata.parking.app.ComdataGaricApp;
-import com.comdata.parking.app.config.Constants;
-import com.comdata.parking.app.config.audit.AuditEventConverter;
-import com.comdata.parking.app.domain.PersistentAuditEvent;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -16,6 +12,13 @@ import org.springframework.security.web.authentication.WebAuthenticationDetails;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.comdata.factory.app.ComdataGaricApp;
+import com.comdata.factory.app.config.Constants;
+import com.comdata.factory.app.config.audit.AuditEventConverter;
+import com.comdata.factory.app.domain.PersistentAuditEvent;
+import com.comdata.factory.app.repository.CustomAuditEventRepository;
+import com.comdata.factory.app.repository.PersistenceAuditEventRepository;
+
 import javax.servlet.http.HttpSession;
 import java.time.Instant;
 import java.util.Date;
@@ -23,8 +26,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static com.comdata.factory.app.repository.CustomAuditEventRepository.EVENT_DATA_COLUMN_MAX_LENGTH;
 import static org.assertj.core.api.Assertions.assertThat;
-import static com.comdata.parking.app.repository.CustomAuditEventRepository.EVENT_DATA_COLUMN_MAX_LENGTH;
 
 /**
  * Test class for the CustomAuditEventRepository class.
