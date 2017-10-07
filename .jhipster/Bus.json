@@ -1,0 +1,20 @@
+{
+    "fluentMethods": true,
+    "relationships": [],
+    "fields": [
+        {
+            "fieldName": "seatsSitting",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "seatsStanding",
+            "fieldType": "Integer"
+        }
+    ],
+    "changelogDate": "20171007175025",
+    "javadoc": "relationship OneToOne {\nCabrio{car} to Car{cabrio},\nClassicCar{car} to Car{classicCar}\n}",
+    "entityTableName": "bus",
+    "dto": "no",
+    "pagination": "pagination",
+    "service": "serviceImpl"
+}

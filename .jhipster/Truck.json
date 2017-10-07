@@ -1,0 +1,22 @@
+{
+    "fluentMethods": true,
+    "relationships": [],
+    "fields": [
+        {
+            "fieldName": "numberOfAxles",
+            "fieldType": "Integer",
+            "fieldValidateRules": [
+                "min",
+                "max"
+            ],
+            "fieldValidateRulesMin": 2,
+            "fieldValidateRulesMax": 4
+        }
+    ],
+    "changelogDate": "20171007175028",
+    "javadoc": "relationship OneToOne {\nBus{vehicle} to Vehicle{bus},\nCityBus{bus} to Bus{cityBus},\nInterCityBus{bus} to Bus{interCityBus}\n}",
+    "entityTableName": "truck",
+    "dto": "no",
+    "pagination": "pagination",
+    "service": "serviceImpl"
+}

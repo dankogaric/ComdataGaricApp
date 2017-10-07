@@ -1,0 +1,15 @@
+{
+    "fluentMethods": true,
+    "relationships": [],
+    "fields": [
+        {
+            "fieldName": "hasRemovableRoof",
+            "fieldType": "Boolean"
+        }
+    ],
+    "changelogDate": "20171007175023",
+    "entityTableName": "cabrio",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no"
+}

@@ -1,0 +1,15 @@
+{
+    "fluentMethods": true,
+    "relationships": [],
+    "fields": [
+        {
+            "fieldName": "horsePower",
+            "fieldType": "Integer"
+        }
+    ],
+    "changelogDate": "20171007175029",
+    "entityTableName": "tructor_truck",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no"
+}

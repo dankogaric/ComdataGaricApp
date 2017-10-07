@@ -1,0 +1,15 @@
+{
+    "fluentMethods": true,
+    "relationships": [],
+    "fields": [
+        {
+            "fieldName": "trunkCapacity",
+            "fieldType": "Integer"
+        }
+    ],
+    "changelogDate": "20171007175027",
+    "entityTableName": "inter_city_bus",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no"
+}

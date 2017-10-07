@@ -1,0 +1,66 @@
+entity Factory {
+	name String
+}
+
+entity Car {
+	manufacturer String,
+    color String,
+    area Integer,
+    seatsNumber Integer,
+    addEq AdditionalEquipment
+    isCabrio Boolean,
+    roofRemove Boolean,
+    roofTopCapacity Integer
+}
+
+entity AdditionalEquipment {
+	abs Boolean,
+    esp Boolean,
+    glassRoof Boolean,
+    aluWheels Boolean
+}
+
+entity Bus {
+manufacturer String,
+    color String,
+    area Integer,
+	seatsSitting Integer,
+    seatsStanding Integer,
+    isCityBus Boolean,
+    whrist Boolean,
+    trunkCapacity Integer
+}
+
+entity Truck {
+	manufacturer String,
+    color String,
+    area Integer,
+	numberOfAxles Axle,
+    isTructor Boolean,
+    horsePower Integer,
+    tankCapacity Integer
+}
+
+enum Axle {
+    2, 3, 4
+}
+
+entity Parking {
+	area Integer,
+    hight Integer,
+    restArea Integer
+}
+
+relationship ManyToMany {
+	Car to AdditionalEquipment
+}
+
+paginate Bus with pagination
+paginate CityBus with pagination
+paginate Truck with pagination
+paginate TankTruck with pagination
+
+service Bus with serviceImpl
+service Truck with serviceImpl
+service Car with serviceImpl
+

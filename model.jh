@@ -1,0 +1,111 @@
+
+entity Manufacturer{
+	name String
+}
+
+/***
+ * Basic attributes of every vehicle
+**/
+entity Vehicle { 
+    color String,
+    area Integer
+}
+
+relationship ManyToOne{
+	Vehicle{manufacturer} to Manufacturer
+}
+
+entity Car {
+	seatsNumber Integer
+}
+
+entity AdditionalEquipment {
+	hasAbs Boolean,
+    hasEsp Boolean,
+    hasGlassRoof Boolean,
+    hasAluWheels Boolean
+}
+
+relationship OneToOne {
+	Car{addEq} to AdditionalEquipment{car}
+}
+
+entity Cabrio {
+	hasRemovableRoof Boolean
+}
+
+entity ClassicCar {
+	roofTopCapacity Integer
+}
+
+/*
+relationship OneToOne {
+	Cabrio{car} to Car{cabrio}, 
+	ClassicCar{car} to Car{classicCar} 
+}
+*/
+
+
+entity Bus {
+	seatsSitting Integer,
+    seatsStanding Integer
+}
+
+entity CityBus {
+	hasWhrist Boolean
+}
+
+entity InterCityBus {
+	trunkCapacity Integer
+}
+
+
+/*
+relationship OneToOne {
+	 Bus{vehicle} to Vehicle{bus},
+	 CityBus{bus} to Bus{cityBus},
+	 InterCityBus{bus} to Bus{interCityBus}
+}
+*/
+
+entity Truck {
+	numberOfAxles Integer min(2) max(4)
+}
+
+
+entity TructorTruck {
+	horsePower Integer
+}
+
+entity TankTruck {
+	tankCapacity Integer
+}
+
+entity Parking {
+	area Integer,
+    height Double,
+    restArea Integer,
+	hasRoof Boolean
+}
+
+relationship ManyToOne {
+	Vehicle{parking} to Parking
+}
+
+
+
+paginate Vehicle with pagination
+paginate Bus with pagination
+paginate CityBus with pagination
+paginate Truck with pagination
+paginate TankTruck with pagination
+
+service Vehicle with serviceImpl
+service Bus with serviceImpl
+service Truck with serviceImpl
+service Car with serviceImpl
+service CityBus with serviceImpl
+service TankTruck with serviceImpl
+
+
+

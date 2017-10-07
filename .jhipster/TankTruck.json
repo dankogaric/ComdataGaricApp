@@ -1,0 +1,15 @@
+{
+    "fluentMethods": true,
+    "relationships": [],
+    "fields": [
+        {
+            "fieldName": "tankCapacity",
+            "fieldType": "Integer"
+        }
+    ],
+    "changelogDate": "20171007175030",
+    "entityTableName": "tank_truck",
+    "dto": "no",
+    "pagination": "pagination",
+    "service": "serviceImpl"
+}

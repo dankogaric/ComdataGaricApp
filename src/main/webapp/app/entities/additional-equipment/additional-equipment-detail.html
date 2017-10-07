@@ -1,0 +1,35 @@
+
+<div>
+    <h2><span>Additional Equipment</span> {{vm.additionalEquipment.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span>Has Abs</span></dt>
+        <dd>
+            <span>{{vm.additionalEquipment.hasAbs}}</span>
+        </dd>
+        <dt><span>Has Esp</span></dt>
+        <dd>
+            <span>{{vm.additionalEquipment.hasEsp}}</span>
+        </dd>
+        <dt><span>Has Glass Roof</span></dt>
+        <dd>
+            <span>{{vm.additionalEquipment.hasGlassRoof}}</span>
+        </dd>
+        <dt><span>Has Alu Wheels</span></dt>
+        <dd>
+            <span>{{vm.additionalEquipment.hasAluWheels}}</span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button" ui-sref="additional-equipment-detail.edit({id:vm.additionalEquipment.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-sm-down"> Edit</span>
+    </button>
+</div>

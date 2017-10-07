@@ -1,0 +1,24 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipType": "one-to-one",
+            "relationshipName": "addEq",
+            "otherEntityName": "additionalEquipment",
+            "otherEntityField": "id",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "car"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "seatsNumber",
+            "fieldType": "Integer"
+        }
+    ],
+    "changelogDate": "20171007175021",
+    "entityTableName": "car",
+    "dto": "no",
+    "pagination": "no",
+    "service": "serviceImpl"
+}

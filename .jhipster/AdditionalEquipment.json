@@ -1,0 +1,35 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipType": "one-to-one",
+            "relationshipName": "car",
+            "otherEntityName": "car",
+            "ownerSide": false,
+            "otherEntityRelationshipName": "addEq"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "hasAbs",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "hasEsp",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "hasGlassRoof",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "hasAluWheels",
+            "fieldType": "Boolean"
+        }
+    ],
+    "changelogDate": "20171007175022",
+    "entityTableName": "additional_equipment",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no"
+}

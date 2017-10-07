@@ -1,0 +1,27 @@
+{
+    "fluentMethods": true,
+    "relationships": [],
+    "fields": [
+        {
+            "fieldName": "area",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "height",
+            "fieldType": "Double"
+        },
+        {
+            "fieldName": "restArea",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "hasRoof",
+            "fieldType": "Boolean"
+        }
+    ],
+    "changelogDate": "20171007175031",
+    "entityTableName": "parking",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no"
+}

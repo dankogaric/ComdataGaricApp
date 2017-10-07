@@ -1,13 +1,9 @@
-entity Factory {
-	name String
-}
 
 entity Car {
 	manufacturer String,
     color String,
     area Integer,
-    seatsNumber Integer,
-    addEq AdditionalEquipment
+    seatsNumber Integer, 
     isCabrio Boolean,
     roofRemove Boolean,
     roofTopCapacity Integer
@@ -19,6 +15,8 @@ entity AdditionalEquipment {
     glassRoof Boolean,
     aluWheels Boolean
 }
+
+
 
 entity Bus {
 manufacturer String,

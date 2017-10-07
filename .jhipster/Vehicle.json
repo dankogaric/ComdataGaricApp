@@ -1,0 +1,33 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "manufacturer",
+            "otherEntityName": "manufacturer",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "parking",
+            "otherEntityName": "parking",
+            "otherEntityField": "id"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "color",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "area",
+            "fieldType": "Integer"
+        }
+    ],
+    "changelogDate": "20171007175020",
+    "javadoc": "Basic attributes of every vehicle",
+    "entityTableName": "vehicle",
+    "dto": "no",
+    "pagination": "pagination",
+    "service": "serviceImpl"
+}

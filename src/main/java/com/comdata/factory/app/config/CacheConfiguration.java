@@ -41,6 +41,19 @@ public class CacheConfiguration {
             cm.createCache(com.comdata.factory.app.domain.User.class.getName(), jcacheConfiguration);
             cm.createCache(com.comdata.factory.app.domain.Authority.class.getName(), jcacheConfiguration);
             cm.createCache(com.comdata.factory.app.domain.User.class.getName() + ".authorities", jcacheConfiguration);
+            cm.createCache(com.comdata.factory.app.domain.Manufacturer.class.getName(), jcacheConfiguration);
+            cm.createCache(com.comdata.factory.app.domain.Vehicle.class.getName(), jcacheConfiguration);
+            cm.createCache(com.comdata.factory.app.domain.Car.class.getName(), jcacheConfiguration);
+            cm.createCache(com.comdata.factory.app.domain.AdditionalEquipment.class.getName(), jcacheConfiguration);
+            cm.createCache(com.comdata.factory.app.domain.Cabrio.class.getName(), jcacheConfiguration);
+            cm.createCache(com.comdata.factory.app.domain.ClassicCar.class.getName(), jcacheConfiguration);
+            cm.createCache(com.comdata.factory.app.domain.Bus.class.getName(), jcacheConfiguration);
+            cm.createCache(com.comdata.factory.app.domain.CityBus.class.getName(), jcacheConfiguration);
+            cm.createCache(com.comdata.factory.app.domain.InterCityBus.class.getName(), jcacheConfiguration);
+            cm.createCache(com.comdata.factory.app.domain.Truck.class.getName(), jcacheConfiguration);
+            cm.createCache(com.comdata.factory.app.domain.TructorTruck.class.getName(), jcacheConfiguration);
+            cm.createCache(com.comdata.factory.app.domain.TankTruck.class.getName(), jcacheConfiguration);
+            cm.createCache(com.comdata.factory.app.domain.Parking.class.getName(), jcacheConfiguration);
             // jhipster-needle-ehcache-add-entry
         };
     }

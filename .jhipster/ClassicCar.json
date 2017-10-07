@@ -1,0 +1,15 @@
+{
+    "fluentMethods": true,
+    "relationships": [],
+    "fields": [
+        {
+            "fieldName": "roofTopCapacity",
+            "fieldType": "Integer"
+        }
+    ],
+    "changelogDate": "20171007175024",
+    "entityTableName": "classic_car",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no"
+}
