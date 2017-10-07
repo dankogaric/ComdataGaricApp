@@ -1,8 +1,7 @@
 package com.comdata.factory.app.web.rest.vm;
 
-import javax.validation.constraints.Size;
-
 import com.comdata.factory.app.service.dto.UserDTO;
+import javax.validation.constraints.Size;
 
 import java.time.Instant;
 import java.util.Set;

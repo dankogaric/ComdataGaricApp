@@ -1,5 +1,7 @@
 package com.comdata.factory.app.security;
 
+import com.comdata.factory.app.domain.User;
+import com.comdata.factory.app.repository.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.core.GrantedAuthority;
@@ -9,9 +11,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
-
-import com.comdata.factory.app.domain.User;
-import com.comdata.factory.app.repository.UserRepository;
 
 import java.util.*;
 import java.util.stream.Collectors;

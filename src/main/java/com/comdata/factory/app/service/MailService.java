@@ -1,5 +1,7 @@
 package com.comdata.factory.app.service;
 
+import com.comdata.factory.app.domain.User;
+
 import io.github.jhipster.config.JHipsterProperties;
 
 import org.apache.commons.lang3.CharEncoding;
@@ -12,8 +14,6 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.thymeleaf.context.Context;
 import org.thymeleaf.spring4.SpringTemplateEngine;
-
-import com.comdata.factory.app.domain.User;
 
 import javax.mail.internet.MimeMessage;
 import java.util.Locale;

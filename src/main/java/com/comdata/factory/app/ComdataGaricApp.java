@@ -1,5 +1,8 @@
 package com.comdata.factory.app;
 
+import com.comdata.factory.app.config.ApplicationProperties;
+import com.comdata.factory.app.config.DefaultProfileUtil;
+
 import io.github.jhipster.config.JHipsterConstants;
 
 import org.slf4j.Logger;
@@ -11,9 +14,6 @@ import org.springframework.boot.autoconfigure.liquibase.LiquibaseProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.core.env.Environment;
-
-import com.comdata.factory.app.config.ApplicationProperties;
-import com.comdata.factory.app.config.DefaultProfileUtil;
 
 import javax.annotation.PostConstruct;
 import java.net.InetAddress;

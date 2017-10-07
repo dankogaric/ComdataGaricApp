@@ -1,11 +1,11 @@
 package com.comdata.factory.app.config;
 
+import com.comdata.factory.app.aop.logging.LoggingAspect;
+
 import io.github.jhipster.config.JHipsterConstants;
 
 import org.springframework.context.annotation.*;
 import org.springframework.core.env.Environment;
-
-import com.comdata.factory.app.aop.logging.LoggingAspect;
 
 @Configuration
 @EnableAspectJAutoProxy

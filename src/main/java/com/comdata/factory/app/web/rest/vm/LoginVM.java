@@ -1,10 +1,9 @@
 package com.comdata.factory.app.web.rest.vm;
 
+import com.comdata.factory.app.config.Constants;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
-
-import com.comdata.factory.app.config.Constants;
 
 /**
  * View Model object for storing a user's credentials.

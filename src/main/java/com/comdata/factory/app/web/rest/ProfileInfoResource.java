@@ -1,11 +1,11 @@
 package com.comdata.factory.app.web.rest;
 
+import com.comdata.factory.app.config.DefaultProfileUtil;
+
 import io.github.jhipster.config.JHipsterProperties;
 
 import org.springframework.core.env.Environment;
 import org.springframework.web.bind.annotation.*;
-
-import com.comdata.factory.app.config.DefaultProfileUtil;
 
 import java.util.ArrayList;
 import java.util.Arrays;

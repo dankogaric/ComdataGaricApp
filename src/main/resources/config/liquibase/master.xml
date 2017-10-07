@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+
+    <include file="config/liquibase/changelog/00000000000000_initial_schema.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20171007175019_added_entity_Manufacturer.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20171007175020_added_entity_Vehicle.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20171007175021_added_entity_Car.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20171007175022_added_entity_AdditionalEquipment.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20171007175023_added_entity_Cabrio.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20171007175024_added_entity_ClassicCar.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20171007175025_added_entity_Bus.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20171007175026_added_entity_CityBus.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20171007175027_added_entity_InterCityBus.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20171007175028_added_entity_Truck.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20171007175029_added_entity_TructorTruck.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20171007175030_added_entity_TankTruck.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20171007175031_added_entity_Parking.xml" relativeToChangelogFile="false"/>
+    <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
+    <include file="config/liquibase/changelog/20171007175020_added_entity_constraints_Vehicle.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20171007175021_added_entity_constraints_Car.xml" relativeToChangelogFile="false"/>
+    <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
+</databaseChangeLog>

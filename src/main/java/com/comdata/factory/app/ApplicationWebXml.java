@@ -1,9 +1,8 @@
 package com.comdata.factory.app;
 
+import com.comdata.factory.app.config.DefaultProfileUtil;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.support.SpringBootServletInitializer;
-
-import com.comdata.factory.app.config.DefaultProfileUtil;
 
 /**
  * This is a helper Java class that provides an alternative to creating a web.xml.

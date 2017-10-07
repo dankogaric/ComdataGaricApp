@@ -1,10 +1,10 @@
 package com.comdata.factory.app.service.mapper;
 
-import org.springframework.stereotype.Service;
-
 import com.comdata.factory.app.domain.Authority;
 import com.comdata.factory.app.domain.User;
 import com.comdata.factory.app.service.dto.UserDTO;
+
+import org.springframework.stereotype.Service;
 
 import java.util.*;
 import java.util.stream.Collectors;

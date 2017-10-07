@@ -1,13 +1,12 @@
 package com.comdata.factory.app.service;
 
+import com.comdata.factory.app.config.audit.AuditEventConverter;
+import com.comdata.factory.app.repository.PersistenceAuditEventRepository;
 import org.springframework.boot.actuate.audit.AuditEvent;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import com.comdata.factory.app.config.audit.AuditEventConverter;
-import com.comdata.factory.app.repository.PersistenceAuditEventRepository;
 
 import java.time.Instant;
 import java.util.Optional;

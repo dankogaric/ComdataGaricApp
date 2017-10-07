@@ -12,13 +12,6 @@ node_tmp/
 node_modules/
 npm-debug.log.*
 
-
-dist
-.tmp
-.sass-cache
-bower_components
-/src/main/webapp/bower_components/*
-
 ######################
 # SASS
 ######################
@@ -146,3 +139,5 @@ Desktop.ini
 # ESLint
 ######################
 .eslintcache
+
+/src/main/webapp/bower_components/*

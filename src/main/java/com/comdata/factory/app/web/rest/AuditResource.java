@@ -1,5 +1,8 @@
 package com.comdata.factory.app.web.rest;
 
+import com.comdata.factory.app.service.AuditEventService;
+import com.comdata.factory.app.web.rest.util.PaginationUtil;
+
 import io.github.jhipster.web.util.ResponseUtil;
 import io.swagger.annotations.ApiParam;
 import org.springframework.boot.actuate.audit.AuditEvent;
@@ -9,9 +12,6 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import com.comdata.factory.app.service.AuditEventService;
-import com.comdata.factory.app.web.rest.util.PaginationUtil;
 
 import java.time.LocalDate;
 import java.time.ZoneId;

@@ -1,5 +1,15 @@
 package com.comdata.factory.app.service;
 
+import com.comdata.factory.app.domain.Authority;
+import com.comdata.factory.app.domain.User;
+import com.comdata.factory.app.repository.AuthorityRepository;
+import com.comdata.factory.app.config.Constants;
+import com.comdata.factory.app.repository.UserRepository;
+import com.comdata.factory.app.security.AuthoritiesConstants;
+import com.comdata.factory.app.security.SecurityUtils;
+import com.comdata.factory.app.service.util.RandomUtil;
+import com.comdata.factory.app.service.dto.UserDTO;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.cache.CacheManager;
@@ -9,16 +19,6 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import com.comdata.factory.app.config.Constants;
-import com.comdata.factory.app.domain.Authority;
-import com.comdata.factory.app.domain.User;
-import com.comdata.factory.app.repository.AuthorityRepository;
-import com.comdata.factory.app.repository.UserRepository;
-import com.comdata.factory.app.security.AuthoritiesConstants;
-import com.comdata.factory.app.security.SecurityUtils;
-import com.comdata.factory.app.service.dto.UserDTO;
-import com.comdata.factory.app.service.util.RandomUtil;
 
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;

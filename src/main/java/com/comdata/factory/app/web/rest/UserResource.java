@@ -1,17 +1,16 @@
 package com.comdata.factory.app.web.rest;
 
-import com.codahale.metrics.annotation.Timed;
 import com.comdata.factory.app.config.Constants;
+import com.codahale.metrics.annotation.Timed;
 import com.comdata.factory.app.domain.User;
 import com.comdata.factory.app.repository.UserRepository;
 import com.comdata.factory.app.security.AuthoritiesConstants;
 import com.comdata.factory.app.service.MailService;
 import com.comdata.factory.app.service.UserService;
 import com.comdata.factory.app.service.dto.UserDTO;
+import com.comdata.factory.app.web.rest.vm.ManagedUserVM;
 import com.comdata.factory.app.web.rest.util.HeaderUtil;
 import com.comdata.factory.app.web.rest.util.PaginationUtil;
-import com.comdata.factory.app.web.rest.vm.ManagedUserVM;
-
 import io.github.jhipster.web.util.ResponseUtil;
 import io.swagger.annotations.ApiParam;
 

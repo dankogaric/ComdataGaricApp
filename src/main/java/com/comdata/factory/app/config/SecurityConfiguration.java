@@ -1,5 +1,8 @@
 package com.comdata.factory.app.config;
 
+import com.comdata.factory.app.security.*;
+import com.comdata.factory.app.security.jwt.*;
+
 import io.github.jhipster.security.*;
 
 import org.springframework.beans.factory.BeanInitializationException;
@@ -18,10 +21,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.data.repository.query.SecurityEvaluationContextExtension;
 import org.springframework.web.filter.CorsFilter;
-
-import com.comdata.factory.app.security.*;
-import com.comdata.factory.app.security.jwt.*;
-
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import javax.annotation.PostConstruct;

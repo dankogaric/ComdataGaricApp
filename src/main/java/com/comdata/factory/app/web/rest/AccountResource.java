@@ -1,15 +1,16 @@
 package com.comdata.factory.app.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
+
 import com.comdata.factory.app.domain.User;
 import com.comdata.factory.app.repository.UserRepository;
 import com.comdata.factory.app.security.SecurityUtils;
 import com.comdata.factory.app.service.MailService;
 import com.comdata.factory.app.service.UserService;
 import com.comdata.factory.app.service.dto.UserDTO;
-import com.comdata.factory.app.web.rest.util.HeaderUtil;
 import com.comdata.factory.app.web.rest.vm.KeyAndPasswordVM;
 import com.comdata.factory.app.web.rest.vm.ManagedUserVM;
+import com.comdata.factory.app.web.rest.util.HeaderUtil;
 
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;

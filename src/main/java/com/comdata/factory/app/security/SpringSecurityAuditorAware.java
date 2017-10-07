@@ -1,9 +1,9 @@
 package com.comdata.factory.app.security;
 
+import com.comdata.factory.app.config.Constants;
+
 import org.springframework.data.domain.AuditorAware;
 import org.springframework.stereotype.Component;
-
-import com.comdata.factory.app.config.Constants;
 
 /**
  * Implementation of AuditorAware based on Spring Security.

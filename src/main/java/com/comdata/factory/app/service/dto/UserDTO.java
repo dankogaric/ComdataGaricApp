@@ -1,11 +1,12 @@
 package com.comdata.factory.app.service.dto;
 
-import org.hibernate.validator.constraints.Email;
-import org.hibernate.validator.constraints.NotBlank;
-
 import com.comdata.factory.app.config.Constants;
+
 import com.comdata.factory.app.domain.Authority;
 import com.comdata.factory.app.domain.User;
+
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotBlank;
 
 import javax.validation.constraints.*;
 import java.time.Instant;

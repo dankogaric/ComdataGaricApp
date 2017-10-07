@@ -1,9 +1,10 @@
 package com.comdata.factory.app.web.rest;
 
-import com.codahale.metrics.annotation.Timed;
 import com.comdata.factory.app.security.jwt.JWTConfigurer;
 import com.comdata.factory.app.security.jwt.TokenProvider;
 import com.comdata.factory.app.web.rest.vm.LoginVM;
+
+import com.codahale.metrics.annotation.Timed;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import org.slf4j.Logger;

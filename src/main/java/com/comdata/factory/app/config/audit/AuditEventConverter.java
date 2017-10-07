@@ -1,10 +1,10 @@
 package com.comdata.factory.app.config.audit;
 
+import com.comdata.factory.app.domain.PersistentAuditEvent;
+
 import org.springframework.boot.actuate.audit.AuditEvent;
 import org.springframework.security.web.authentication.WebAuthenticationDetails;
 import org.springframework.stereotype.Component;
-
-import com.comdata.factory.app.domain.PersistentAuditEvent;
 
 import java.util.*;
 

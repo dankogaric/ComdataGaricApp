@@ -1,6 +1,7 @@
 package com.comdata.factory.app.domain;
 
 import com.comdata.factory.app.config.Constants;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.annotations.BatchSize;

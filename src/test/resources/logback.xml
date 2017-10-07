@@ -3,7 +3,7 @@
 <configuration scan="true">
     <include resource="org/springframework/boot/logging/logback/base.xml"/>
 
-    <logger name="com.comdata.parking.app" level="INFO"/>
+    <logger name="com.comdata.factory.app" level="INFO"/>
 
     <logger name="io.github.jhipster" level="WARN"/>
 
