@@ -1,17 +1,7 @@
-# ===================================================================
 # Spring Boot configuration for the "dev" profile.
 #
 # This configuration overrides the application.yml file.
-#
-# More information on profiles: http://www.jhipster.tech/profiles/
-# More information on configuration properties: http://www.jhipster.tech/common-application-properties/
-# ===================================================================
 
-# ===================================================================
-# Standard Spring Boot properties.
-# Full reference is available at:
-# http://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html
-# ===================================================================
 
 spring:
     profiles:
@@ -78,11 +68,6 @@ liquibase:
 server:
     port: 8080
 
-# ===================================================================
-# JHipster specific properties
-#
-# Full reference is available at: http://www.jhipster.tech/common-application-properties/
-# ===================================================================
 
 jhipster:
     http:
@@ -129,14 +114,5 @@ jhipster:
             port: 5000
             queue-size: 512
 
-
-# ===================================================================
-# Application specific properties
-# Add your own application properties here, see the ApplicationProperties class
-# to have type-safe configuration, like in the JHipsterProperties above
-#
-# More documentation is available at:
-# http://www.jhipster.tech/common-application-properties/
-# ===================================================================
 
 application:
