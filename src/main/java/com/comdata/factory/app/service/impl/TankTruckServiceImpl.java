@@ -3,6 +3,9 @@ package com.comdata.factory.app.service.impl;
 import com.comdata.factory.app.service.TankTruckService;
 import com.comdata.factory.app.domain.TankTruck;
 import com.comdata.factory.app.repository.TankTruckRepository;
+
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -46,9 +49,9 @@ public class TankTruckServiceImpl implements TankTruckService{
      */
     @Override
     @Transactional(readOnly = true)
-    public Page<TankTruck> findAll(Pageable pageable) {
+    public List<TankTruck> findAll() {
         log.debug("Request to get all TankTrucks");
-        return tankTruckRepository.findAll(pageable);
+        return tankTruckRepository.findAll();
     }
 
     /**

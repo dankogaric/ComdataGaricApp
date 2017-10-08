@@ -1,8 +1,8 @@
 package com.comdata.factory.app.service;
 
 import com.comdata.factory.app.domain.Bus;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
+
+import java.util.List;
 
 /**
  * Service Interface for managing Bus.
@@ -23,7 +23,7 @@ public interface BusService {
      *  @param pageable the pagination information
      *  @return the list of entities
      */
-    Page<Bus> findAll(Pageable pageable);
+    List<Bus> findAll();
 
     /**
      *  Get the "id" bus.

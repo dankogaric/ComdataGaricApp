@@ -13,25 +13,13 @@ import java.util.Objects;
 @Entity
 @Table(name = "tructor_truck")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-public class TructorTruck implements Serializable {
+@PrimaryKeyJoinColumn(name = "tructor_truck_id", referencedColumnName = "truck_id")
+public class TructorTruck extends Truck implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
     @Column(name = "horse_power")
     private Integer horsePower;
-
-    // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public Integer getHorsePower() {
         return horsePower;

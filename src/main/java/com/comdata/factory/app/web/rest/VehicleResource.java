@@ -1,8 +1,16 @@
 package com.comdata.factory.app.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
+import com.comdata.factory.app.domain.Bus;
+import com.comdata.factory.app.domain.Car;
+import com.comdata.factory.app.domain.Truck;
 import com.comdata.factory.app.domain.Vehicle;
+import com.comdata.factory.app.service.BusService;
+import com.comdata.factory.app.service.CarService;
+import com.comdata.factory.app.service.TruckService;
 import com.comdata.factory.app.service.VehicleService;
+import com.comdata.factory.app.web.rest.dto.CarDTO;
+import com.comdata.factory.app.web.rest.dto.VehicleDTO;
 import com.comdata.factory.app.web.rest.util.HeaderUtil;
 import com.comdata.factory.app.web.rest.util.PaginationUtil;
 import io.swagger.annotations.ApiParam;
@@ -18,7 +26,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 import java.net.URISyntaxException;
-
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -34,12 +42,20 @@ public class VehicleResource {
     private static final String ENTITY_NAME = "vehicle";
 
     private final VehicleService vehicleService;
+    private final CarService carService;
+    private final BusService busService;
+    private final TruckService truckService;
 
-    public VehicleResource(VehicleService vehicleService) {
-        this.vehicleService = vehicleService;
-    }
+    public VehicleResource(VehicleService vehicleService, CarService carService, BusService busService,
+			TruckService truckService) {
+		super();
+		this.vehicleService = vehicleService;
+		this.carService = carService;
+		this.busService = busService;
+		this.truckService = truckService;
+	}
 
-    /**
+	/**
      * POST  /vehicles : Create a new vehicle.
      *
      * @param vehicle the vehicle to create
@@ -89,11 +105,22 @@ public class VehicleResource {
      */
     @GetMapping("/vehicles")
     @Timed
-    public ResponseEntity<List<Vehicle>> getAllVehicles(@ApiParam Pageable pageable) {
+    public List<VehicleDTO> getAllVehicles() {
         log.debug("REST request to get a page of Vehicles");
-        Page<Vehicle> page = vehicleService.findAll(pageable);
-        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/vehicles");
-        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+        List<Car> allCars =  carService.findAll();
+        List<Bus> allBuses =  busService.findAll();
+        List<Truck> allTrucks =  truckService.findAll();
+        List<VehicleDTO> vehiclesDTOs = new ArrayList<>();
+        for(Car car : allCars) {
+        	vehiclesDTOs.add(new VehicleDTO(car));
+        }
+        for(Bus bus : allBuses) {
+        	vehiclesDTOs.add(new VehicleDTO(bus));
+        }
+        for(Truck truck : allTrucks) {
+        	vehiclesDTOs.add(new VehicleDTO(truck));
+        }
+        return vehiclesDTOs;
     }
 
     /**

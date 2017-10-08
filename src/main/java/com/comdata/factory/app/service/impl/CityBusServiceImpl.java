@@ -3,6 +3,9 @@ package com.comdata.factory.app.service.impl;
 import com.comdata.factory.app.service.CityBusService;
 import com.comdata.factory.app.domain.CityBus;
 import com.comdata.factory.app.repository.CityBusRepository;
+
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -46,9 +49,9 @@ public class CityBusServiceImpl implements CityBusService{
      */
     @Override
     @Transactional(readOnly = true)
-    public Page<CityBus> findAll(Pageable pageable) {
+    public List<CityBus> findAll() {
         log.debug("Request to get all CityBuses");
-        return cityBusRepository.findAll(pageable);
+        return cityBusRepository.findAll();
     }
 
     /**

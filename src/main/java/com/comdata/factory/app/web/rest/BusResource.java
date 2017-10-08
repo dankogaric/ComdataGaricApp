@@ -2,7 +2,10 @@ package com.comdata.factory.app.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.comdata.factory.app.domain.Bus;
+import com.comdata.factory.app.domain.Car;
 import com.comdata.factory.app.service.BusService;
+import com.comdata.factory.app.web.rest.dto.BusDTO;
+import com.comdata.factory.app.web.rest.dto.CarDTO;
 import com.comdata.factory.app.web.rest.util.HeaderUtil;
 import com.comdata.factory.app.web.rest.util.PaginationUtil;
 import io.swagger.annotations.ApiParam;
@@ -18,7 +21,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 import java.net.URISyntaxException;
-
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -48,12 +51,12 @@ public class BusResource {
      */
     @PostMapping("/buses")
     @Timed
-    public ResponseEntity<Bus> createBus(@RequestBody Bus bus) throws URISyntaxException {
-        log.debug("REST request to save Bus : {}", bus);
-        if (bus.getId() != null) {
+    public ResponseEntity<Bus> createBus(@RequestBody BusDTO dto) throws URISyntaxException {
+        log.debug("REST request to save Bus : {}", dto);
+        if (dto.getId() != null) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert(ENTITY_NAME, "idexists", "A new bus cannot already have an ID")).body(null);
         }
-        Bus result = busService.save(bus);
+        Bus result = busService.save(dto.convertToBusEntity());
         
         return ResponseEntity.created(new URI("/api/buses/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
@@ -71,15 +74,15 @@ public class BusResource {
      */
     @PutMapping("/buses")
     @Timed
-    public ResponseEntity<Bus> updateBus(@RequestBody Bus bus) throws URISyntaxException {
-        log.debug("REST request to update Bus : {}", bus);
-        if (bus.getId() == null) {
-            return createBus(bus);
+    public ResponseEntity<BusDTO> updateBus(@RequestBody BusDTO dto) throws URISyntaxException {
+        log.debug("REST request to update Bus : {}", dto);
+        if (dto.getId() == null) {
+        	return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert(ENTITY_NAME, "idexists", "You can only update an existing bus.")).body(null);
         }
-        Bus result = busService.save(bus);
+        Bus result = busService.save(dto.convertToBusEntity());
         return ResponseEntity.ok()
-            .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, bus.getId().toString()))
-            .body(result);
+            .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, dto.getId().toString()))
+            .body(new BusDTO(result));
     }
 
     /**
@@ -90,11 +93,14 @@ public class BusResource {
      */
     @GetMapping("/buses")
     @Timed
-    public ResponseEntity<List<Bus>> getAllBuses(@ApiParam Pageable pageable) {
+    public List<BusDTO> getAllBuses() {
         log.debug("REST request to get a page of Buses");
-        Page<Bus> page = busService.findAll(pageable);
-        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/buses");
-        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+        List<Bus> allBuses =  busService.findAll();
+        List<BusDTO> allDTOs = new ArrayList<>();
+        for(Bus bus: allBuses) {
+        	allDTOs.add(new BusDTO(bus));
+        }
+        return allDTOs;
     }
 
     /**
@@ -105,10 +111,10 @@ public class BusResource {
      */
     @GetMapping("/buses/{id}")
     @Timed
-    public ResponseEntity<Bus> getBus(@PathVariable Long id) {
+    public ResponseEntity<BusDTO> getBus(@PathVariable Long id) {
         log.debug("REST request to get Bus : {}", id);
         Bus bus = busService.findOne(id);
-        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(bus));
+        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(new BusDTO(bus)));
     }
 
     /**

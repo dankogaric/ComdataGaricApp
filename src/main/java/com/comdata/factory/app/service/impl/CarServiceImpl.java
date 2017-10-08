@@ -8,7 +8,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.comdata.factory.app.domain.AdditionalEquipment;
 import com.comdata.factory.app.domain.Cabrio;
 import com.comdata.factory.app.domain.Car;
 import com.comdata.factory.app.domain.ClassicCar;

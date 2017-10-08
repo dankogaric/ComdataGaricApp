@@ -10,15 +10,11 @@ import java.io.Serializable;
 import java.util.Objects;
 
 /**
- * relationship OneToOne {
- * Bus{vehicle} to Vehicle{bus},
- * CityBus{bus} to Bus{cityBus},
- * InterCityBus{bus} to Bus{interCityBus}
- * }
+ * A bus
  */
-@ApiModel(description = "relationship OneToOne { Bus{vehicle} to Vehicle{bus}, CityBus{bus} to Bus{cityBus}, InterCityBus{bus} to Bus{interCityBus} }")
 @Entity
 @Table(name = "truck")
+@Inheritance(strategy=InheritanceType.JOINED)
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class Truck implements Serializable {
 
@@ -26,6 +22,7 @@ public class Truck implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="truck_id")
     private Long id;
 
     @Min(value = 2)

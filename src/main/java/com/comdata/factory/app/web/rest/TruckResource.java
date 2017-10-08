@@ -1,8 +1,13 @@
 package com.comdata.factory.app.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
+import com.comdata.factory.app.domain.Car;
 import com.comdata.factory.app.domain.Truck;
+import com.comdata.factory.app.service.BusService;
 import com.comdata.factory.app.service.TruckService;
+import com.comdata.factory.app.web.rest.dto.BusDTO;
+import com.comdata.factory.app.web.rest.dto.CarDTO;
+import com.comdata.factory.app.web.rest.dto.TruckDTO;
 import com.comdata.factory.app.web.rest.util.HeaderUtil;
 import com.comdata.factory.app.web.rest.util.PaginationUtil;
 import io.swagger.annotations.ApiParam;
@@ -19,7 +24,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
-
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -49,12 +54,12 @@ public class TruckResource {
      */
     @PostMapping("/trucks")
     @Timed
-    public ResponseEntity<Truck> createTruck(@Valid @RequestBody Truck truck) throws URISyntaxException {
-        log.debug("REST request to save Truck : {}", truck);
-        if (truck.getId() != null) {
+    public ResponseEntity<Truck> createTruck(@Valid @RequestBody TruckDTO dto) throws URISyntaxException {
+        log.debug("REST request to save Truck : {}", dto);
+        if (dto.getId() != null) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert(ENTITY_NAME, "idexists", "A new truck cannot already have an ID")).body(null);
         }
-        Truck result = truckService.save(truck);
+        Truck result = truckService.save(dto.convertToTruckEntity());
         return ResponseEntity.created(new URI("/api/trucks/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
             .body(result);
@@ -71,15 +76,15 @@ public class TruckResource {
      */
     @PutMapping("/trucks")
     @Timed
-    public ResponseEntity<Truck> updateTruck(@Valid @RequestBody Truck truck) throws URISyntaxException {
+    public ResponseEntity<TruckDTO> updateTruck(@Valid @RequestBody TruckDTO truck) throws URISyntaxException {
         log.debug("REST request to update Truck : {}", truck);
         if (truck.getId() == null) {
-            return createTruck(truck);
+        	return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert(ENTITY_NAME, "idexists", "You can only update an existing truck.")).body(null);
         }
-        Truck result = truckService.save(truck);
+        Truck result = truckService.save(truck.convertToTruckEntity());
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, truck.getId().toString()))
-            .body(result);
+            .body(new TruckDTO(result));
     }
 
     /**
@@ -90,11 +95,14 @@ public class TruckResource {
      */
     @GetMapping("/trucks")
     @Timed
-    public ResponseEntity<List<Truck>> getAllTrucks(@ApiParam Pageable pageable) {
+    public List<TruckDTO> getAllTrucks() {
         log.debug("REST request to get a page of Trucks");
-        Page<Truck> page = truckService.findAll(pageable);
-        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/trucks");
-        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+        List<Truck> allTrucks =  truckService.findAll();
+        List<TruckDTO> allDTOs = new ArrayList<>();
+        for(Truck truck: allTrucks) {
+        	allDTOs.add(new TruckDTO(truck));
+        }
+        return allDTOs;
     }
 
     /**
@@ -105,10 +113,10 @@ public class TruckResource {
      */
     @GetMapping("/trucks/{id}")
     @Timed
-    public ResponseEntity<Truck> getTruck(@PathVariable Long id) {
+    public ResponseEntity<TruckDTO> getTruck(@PathVariable Long id) {
         log.debug("REST request to get Truck : {}", id);
         Truck truck = truckService.findOne(id);
-        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(truck));
+        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(new TruckDTO(truck)));
     }
 
     /**

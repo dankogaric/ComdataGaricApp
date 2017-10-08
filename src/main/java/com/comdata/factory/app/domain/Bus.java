@@ -14,9 +14,9 @@ import java.util.Objects;
  * ClassicCar{car} to Car{classicCar}
  * }
  */
-@ApiModel(description = "relationship OneToOne { Cabrio{car} to Car{cabrio}, ClassicCar{car} to Car{classicCar} }")
 @Entity
 @Table(name = "bus")
+@Inheritance(strategy=InheritanceType.JOINED)
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class Bus implements Serializable {
 
@@ -24,6 +24,7 @@ public class Bus implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="bus_id")
     private Long id;
 
     @Column(name = "seats_sitting")

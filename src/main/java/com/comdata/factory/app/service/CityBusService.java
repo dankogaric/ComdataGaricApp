@@ -1,6 +1,9 @@
 package com.comdata.factory.app.service;
 
 import com.comdata.factory.app.domain.CityBus;
+
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -23,7 +26,7 @@ public interface CityBusService {
      *  @param pageable the pagination information
      *  @return the list of entities
      */
-    Page<CityBus> findAll(Pageable pageable);
+    List<CityBus> findAll();
 
     /**
      *  Get the "id" cityBus.

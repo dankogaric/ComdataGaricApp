@@ -1,6 +1,9 @@
 package com.comdata.factory.app.service;
 
 import com.comdata.factory.app.domain.TankTruck;
+
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -23,7 +26,7 @@ public interface TankTruckService {
      *  @param pageable the pagination information
      *  @return the list of entities
      */
-    Page<TankTruck> findAll(Pageable pageable);
+    List<TankTruck> findAll();
 
     /**
      *  Get the "id" tankTruck.
