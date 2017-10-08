@@ -31,6 +31,12 @@ public class Bus implements Serializable {
 
     @Column(name = "seats_standing")
     private Integer seatsStanding;
+    
+    @Column(name = "color")
+    private String color;
+    
+    @ManyToOne
+    private Manufacturer manufacturer;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -96,4 +102,21 @@ public class Bus implements Serializable {
             ", seatsStanding='" + getSeatsStanding() + "'" +
             "}";
     }
+
+	public String getColor() {
+		return color;
+	}
+
+	public void setColor(String color) {
+		this.color = color;
+	}
+
+	public Manufacturer getManufacturer() {
+		return manufacturer;
+	}
+
+	public void setManufacturer(Manufacturer manufacturer) {
+		this.manufacturer = manufacturer;
+	}
+    
 }

@@ -1,20 +1,30 @@
 package com.comdata.factory.app.web.rest;
 
-import com.codahale.metrics.annotation.Timed;
-import com.comdata.factory.app.domain.Car;
-import com.comdata.factory.app.service.CarService;
-import com.comdata.factory.app.web.rest.util.HeaderUtil;
-import io.github.jhipster.web.util.ResponseUtil;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.net.URI;
-import java.net.URISyntaxException;
+import com.codahale.metrics.annotation.Timed;
+import com.comdata.factory.app.domain.Car;
+import com.comdata.factory.app.service.CarService;
+import com.comdata.factory.app.web.rest.dto.CarDTO;
+import com.comdata.factory.app.web.rest.util.HeaderUtil;
 
-import java.util.List;
-import java.util.Optional;
+import io.github.jhipster.web.util.ResponseUtil;
 
 /**
  * REST controller for managing Car.
@@ -42,12 +52,12 @@ public class CarResource {
      */
     @PostMapping("/cars")
     @Timed
-    public ResponseEntity<Car> createCar(@RequestBody Car car) throws URISyntaxException {
-        log.debug("REST request to save Car : {}", car);
-        if (car.getId() != null) {
+    public ResponseEntity<Car> createCar(@RequestBody CarDTO dto) throws URISyntaxException {
+        log.debug("REST request to save Car : {}", dto);
+        if (dto.getId() != null) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert(ENTITY_NAME, "idexists", "A new car cannot already have an ID")).body(null);
         }
-        Car result = carService.save(car);
+        Car result = carService.save(dto.convertToCarEntity());
         return ResponseEntity.created(new URI("/api/cars/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
             .body(result);
@@ -64,15 +74,15 @@ public class CarResource {
      */
     @PutMapping("/cars")
     @Timed
-    public ResponseEntity<Car> updateCar(@RequestBody Car car) throws URISyntaxException {
+    public ResponseEntity<CarDTO> updateCar(@RequestBody CarDTO car) throws URISyntaxException {
         log.debug("REST request to update Car : {}", car);
         if (car.getId() == null) {
-            return createCar(car);
+        	return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert(ENTITY_NAME, "idexists", "You can only update an existing car.")).body(null);
         }
-        Car result = carService.save(car);
+        Car result = carService.save(car.convertToCarEntity());
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, car.getId().toString()))
-            .body(result);
+            .body(new CarDTO(result));
     }
 
     /**
@@ -82,10 +92,16 @@ public class CarResource {
      */
     @GetMapping("/cars")
     @Timed
-    public List<Car> getAllCars() {
+    public List<CarDTO> getAllCars() {
         log.debug("REST request to get all Cars");
-        return carService.findAll();
+        List<Car> allCars =  carService.findAll();
+        List<CarDTO> allDTOs = new ArrayList<>();
+        for(Car car : allCars) {
+        	allDTOs.add(new CarDTO(car));
         }
+        return allDTOs;
+    
+    }
 
     /**
      * GET  /cars/:id : get the "id" car.
@@ -95,10 +111,10 @@ public class CarResource {
      */
     @GetMapping("/cars/{id}")
     @Timed
-    public ResponseEntity<Car> getCar(@PathVariable Long id) {
+    public ResponseEntity<CarDTO> getCar(@PathVariable Long id) {
         log.debug("REST request to get Car : {}", id);
         Car car = carService.findOne(id);
-        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(car));
+        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(new CarDTO(car)));
     }
 
     /**

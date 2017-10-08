@@ -12,6 +12,7 @@ import java.util.Objects;
  */
 @Entity
 @Table(name = "car")
+@Inheritance(strategy=InheritanceType.JOINED)
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class Car implements Serializable {
 
@@ -19,14 +20,21 @@ public class Car implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Column(name="car_id")
+    protected Long id;
 
     @Column(name = "seats_number")
-    private Integer seatsNumber;
+    protected Integer seatsNumber;
 
-    @OneToOne
+    @OneToOne(fetch=FetchType.EAGER)
     @JoinColumn(unique = true)
-    private AdditionalEquipment addEq;
+    protected AdditionalEquipment addEq;
+    
+    @Column(name = "color")
+    protected String color;
+    
+    @ManyToOne(fetch=FetchType.EAGER)
+    private Manufacturer manufacturer;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -62,9 +70,17 @@ public class Car implements Serializable {
     public void setAddEq(AdditionalEquipment additionalEquipment) {
         this.addEq = additionalEquipment;
     }
-    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
+ 
+    
+    public Manufacturer getManufacturer() {
+		return manufacturer;
+	}
 
-    @Override
+	public void setManufacturer(Manufacturer manufacturer) {
+		this.manufacturer = manufacturer;
+	}
+
+	@Override
     public boolean equals(Object o) {
         if (this == o) {
             return true;
@@ -91,4 +107,14 @@ public class Car implements Serializable {
             ", seatsNumber='" + getSeatsNumber() + "'" +
             "}";
     }
+
+	public String getColor() {
+		return color;
+	}
+
+	public void setColor(String color) {
+		this.color = color;
+	}
+    
+    
 }

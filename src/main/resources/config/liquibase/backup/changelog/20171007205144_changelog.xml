@@ -1,0 +1,74 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <changeSet author="danko (generated)" id="1507409549003-1">
+        <addColumn tableName="cabrio">
+            <column name="cabrio_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+    <changeSet author="danko (generated)" id="1507409549003-2">
+        <addColumn tableName="car">
+            <column name="car_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+    <changeSet author="danko (generated)" id="1507409549003-3">
+        <addColumn tableName="classic_car">
+            <column name="classic_car_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+    <changeSet author="danko (generated)" id="1507409549003-4">
+        <addColumn tableName="car">
+            <column name="manufacturer_id" type="bigint"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="danko (generated)" id="1507409549003-5">
+        <createIndex indexName="IX_cabrioPK" tableName="cabrio" unique="true">
+            <column name="cabrio_id"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="danko (generated)" id="1507409549003-6">
+        <createIndex indexName="IX_carPK" tableName="car" unique="true">
+            <column name="car_id"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="danko (generated)" id="1507409549003-7">
+        <createIndex indexName="IX_classic_carPK" tableName="classic_car" unique="true">
+            <column name="classic_car_id"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="danko (generated)" id="1507409549003-8">
+        <addForeignKeyConstraint baseColumnNames="manufacturer_id" baseTableName="car" constraintName="FK3up36si6vweiengpl21jsri71" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="manufacturer"/>
+    </changeSet>
+    <changeSet author="danko (generated)" id="1507409549003-9">
+        <addForeignKeyConstraint baseColumnNames="classic_car_id" baseTableName="classic_car" constraintName="FKaw894grrsst08auk3vfb7xcql" deferrable="false" initiallyDeferred="false" referencedColumnNames="car_id" referencedTableName="car"/>
+    </changeSet>
+    <changeSet author="danko (generated)" id="1507409549003-10">
+        <addForeignKeyConstraint baseColumnNames="cabrio_id" baseTableName="cabrio" constraintName="FKng08xvsxyiw23l4kklqd8shhc" deferrable="false" initiallyDeferred="false" referencedColumnNames="car_id" referencedTableName="car"/>
+    </changeSet>
+    <changeSet author="danko (generated)" id="1507409549003-11">
+        <dropColumn columnName="id" tableName="cabrio"/>
+    </changeSet>
+    <changeSet author="danko (generated)" id="1507409549003-12">
+        <dropColumn columnName="id" tableName="car"/>
+    </changeSet>
+    <changeSet author="danko (generated)" id="1507409549003-13">
+        <dropColumn columnName="id" tableName="classic_car"/>
+    </changeSet>
+    <changeSet author="danko (generated)" id="1507409549003-14">
+        <dropPrimaryKey tableName="cabrio"/>
+        <addPrimaryKey columnNames="cabrio_id" constraintName="cabrioPK" tableName="cabrio"/>
+    </changeSet>
+    <changeSet author="danko (generated)" id="1507409549003-15">
+        <dropPrimaryKey tableName="car"/>
+        <addPrimaryKey columnNames="car_id" constraintName="carPK" tableName="car"/>
+    </changeSet>
+    <changeSet author="danko (generated)" id="1507409549003-16">
+        <dropPrimaryKey tableName="classic_car"/>
+        <addPrimaryKey columnNames="classic_car_id" constraintName="classic_carPK" tableName="classic_car"/>
+    </changeSet>
+</databaseChangeLog>

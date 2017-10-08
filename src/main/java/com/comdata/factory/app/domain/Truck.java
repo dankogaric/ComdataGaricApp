@@ -32,6 +32,12 @@ public class Truck implements Serializable {
     @Max(value = 4)
     @Column(name = "number_of_axles")
     private Integer numberOfAxles;
+    
+    @Column(name = "color")
+    private String color;
+    
+    @ManyToOne
+    private Manufacturer manufacturer;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -83,4 +89,23 @@ public class Truck implements Serializable {
             ", numberOfAxles='" + getNumberOfAxles() + "'" +
             "}";
     }
+
+	public String getColor() {
+		return color;
+	}
+
+	public void setColor(String color) {
+		this.color = color;
+	}
+
+	public Manufacturer getManufacturer() {
+		return manufacturer;
+	}
+
+	public void setManufacturer(Manufacturer manufacturer) {
+		this.manufacturer = manufacturer;
+	}
+    
+    
+    
 }

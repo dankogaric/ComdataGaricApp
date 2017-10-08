@@ -1,5 +1,6 @@
 package com.comdata.factory.app.repository;
 
+import com.comdata.factory.app.domain.Car;
 import com.comdata.factory.app.domain.ClassicCar;
 import org.springframework.stereotype.Repository;
 

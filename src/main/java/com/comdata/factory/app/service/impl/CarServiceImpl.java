@@ -1,14 +1,23 @@
 package com.comdata.factory.app.service.impl;
 
-import com.comdata.factory.app.service.CarService;
-import com.comdata.factory.app.domain.Car;
-import com.comdata.factory.app.repository.CarRepository;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
+import com.comdata.factory.app.domain.AdditionalEquipment;
+import com.comdata.factory.app.domain.Cabrio;
+import com.comdata.factory.app.domain.Car;
+import com.comdata.factory.app.domain.ClassicCar;
+import com.comdata.factory.app.repository.AdditionalEquipmentRepository;
+import com.comdata.factory.app.repository.CabrioRepository;
+import com.comdata.factory.app.repository.CarRepository;
+import com.comdata.factory.app.repository.ClassicCarRepository;
+import com.comdata.factory.app.repository.ManufacturerRepository;
+import com.comdata.factory.app.service.CarService;
 
 /**
  * Service Implementation for managing Car.
@@ -19,13 +28,27 @@ public class CarServiceImpl implements CarService{
 
     private final Logger log = LoggerFactory.getLogger(CarServiceImpl.class);
 
+    private final CabrioRepository cabrioRepository;
+    private final ClassicCarRepository classicCarRepository;
     private final CarRepository carRepository;
+    private final AdditionalEquipmentRepository additionalEquipmentRepository;
+    private final ManufacturerRepository manufacturerRepository;
 
-    public CarServiceImpl(CarRepository carRepository) {
-        this.carRepository = carRepository;
-    }
+  
 
-    /**
+
+	public CarServiceImpl(CabrioRepository cabrioRepository, ClassicCarRepository classicCarRepository,
+			CarRepository carRepository, AdditionalEquipmentRepository additionalEquipmentRepository,
+			ManufacturerRepository manufacturerRepository) {
+		super();
+		this.cabrioRepository = cabrioRepository;
+		this.classicCarRepository = classicCarRepository;
+		this.carRepository = carRepository;
+		this.additionalEquipmentRepository = additionalEquipmentRepository;
+		this.manufacturerRepository = manufacturerRepository;
+	}
+
+	/**
      * Save a car.
      *
      * @param car the entity to save
@@ -34,7 +57,20 @@ public class CarServiceImpl implements CarService{
     @Override
     public Car save(Car car) {
         log.debug("Request to save Car : {}", car);
-        return carRepository.save(car);
+        
+    	if(car.getAddEq().getId() == null) {
+    		car.setAddEq(additionalEquipmentRepository.save(car.getAddEq()));
+    	}
+    	
+    	car.setManufacturer(manufacturerRepository.findOne(car.getManufacturer().getId()));
+
+    	
+        if(car instanceof ClassicCar) {
+        	return classicCarRepository.save((ClassicCar)car);
+        } else {
+        	return cabrioRepository.save((Cabrio)car);
+        }
+        
     }
 
     /**
@@ -46,7 +82,12 @@ public class CarServiceImpl implements CarService{
     @Transactional(readOnly = true)
     public List<Car> findAll() {
         log.debug("Request to get all Cars");
-        return carRepository.findAll();
+        List<ClassicCar> allCarsClassic = classicCarRepository.findAll();
+        List<Cabrio> allCarsCabrio = cabrioRepository.findAll();
+        List<Car> allCars = new ArrayList<>();
+        allCars.addAll(allCarsClassic);
+        allCars.addAll(allCarsCabrio);
+        return allCars;
     }
 
     /**
@@ -59,7 +100,16 @@ public class CarServiceImpl implements CarService{
     @Transactional(readOnly = true)
     public Car findOne(Long id) {
         log.debug("Request to get Car : {}", id);
-        return carRepository.findOne(id);
+        Car car = carRepository.findOne(id);
+        if(car == null) {
+        	return null;
+        }
+        car = classicCarRepository.findOne(id);
+        if(car != null) {
+        	return car;
+        } else {
+        	return cabrioRepository.findOne(id);
+        }
     }
 
     /**

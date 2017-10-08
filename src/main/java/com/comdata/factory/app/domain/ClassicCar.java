@@ -13,25 +13,14 @@ import java.util.Objects;
 @Entity
 @Table(name = "classic_car")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-public class ClassicCar implements Serializable {
+@PrimaryKeyJoinColumn(name = "classic_car_id", referencedColumnName = "car_id")
+public class ClassicCar extends Car implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
 
     @Column(name = "roof_top_capacity")
     private Integer roofTopCapacity;
-
-    // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public Integer getRoofTopCapacity() {
         return roofTopCapacity;

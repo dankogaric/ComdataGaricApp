@@ -34,9 +34,6 @@ public class AdditionalEquipment implements Serializable {
     @Column(name = "has_alu_wheels")
     private Boolean hasAluWheels;
 
-    @OneToOne(mappedBy = "addEq")
-    @JsonIgnore
-    private Car car;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -99,19 +96,6 @@ public class AdditionalEquipment implements Serializable {
         this.hasAluWheels = hasAluWheels;
     }
 
-    public Car getCar() {
-        return car;
-    }
-
-    public AdditionalEquipment car(Car car) {
-        this.car = car;
-        return this;
-    }
-
-    public void setCar(Car car) {
-        this.car = car;
-    }
-    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
     @Override
     public boolean equals(Object o) {

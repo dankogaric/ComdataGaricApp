@@ -54,6 +54,7 @@ public class BusResource {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert(ENTITY_NAME, "idexists", "A new bus cannot already have an ID")).body(null);
         }
         Bus result = busService.save(bus);
+        
         return ResponseEntity.created(new URI("/api/buses/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
             .body(result);

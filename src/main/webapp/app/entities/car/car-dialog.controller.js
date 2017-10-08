@@ -5,22 +5,32 @@
         .module('comdataGaricApp')
         .controller('CarDialogController', CarDialogController);
 
-    CarDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', '$q', 'entity', 'Car', 'AdditionalEquipment'];
+    CarDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', '$q', 'entity', 'Car', 'Manufacturer'];
 
-    function CarDialogController ($timeout, $scope, $stateParams, $uibModalInstance, $q, entity, Car, AdditionalEquipment) {
+    function CarDialogController ($timeout, $scope, $stateParams, $uibModalInstance, $q, entity, Car, Manufacturer) {
         var vm = this;
 
         vm.car = entity;
         vm.clear = clear;
         vm.save = save;
-        vm.addeqs = AdditionalEquipment.query({filter: 'car-is-null'});
-        $q.all([vm.car.$promise, vm.addeqs.$promise]).then(function() {
-            if (!vm.car.addEq || !vm.car.addEq.id) {
+        vm.manufacturers = Manufacturer.query({filter: 'car-is-null'});
+
+        vm.carTypes = ["ClassicCar", "Cabrio"];
+        //vm.selectedCarType = vm.carTypes[0];
+        
+        $q.all([vm.car.$promise, vm.manufacturers.$promise]).then(function() {
+            console.log("THE CAR IS,", vm.car);
+       
+
+            if (!vm.car.manufacturer || !vm.car.manufacturer.id) {
                 return $q.reject();
             }
-            return AdditionalEquipment.get({id : vm.car.addEq.id}).$promise;
+          
+            
+
+            return Manufacturer.get({id : vm.car.manufacturer.id}).$promise;
         }).then(function(addEq) {
-            vm.addeqs.push(addEq);
+          //  vm.manufacturers.push(addEq);
         });
 
         $timeout(function (){

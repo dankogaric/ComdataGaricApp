@@ -1,9 +1,10 @@
 package com.comdata.factory.app.repository;
 
-import com.comdata.factory.app.domain.Car;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.repository.NoRepositoryBean;
 import org.springframework.stereotype.Repository;
 
-import org.springframework.data.jpa.repository.*;
+import com.comdata.factory.app.domain.Car;
 
 
 /**

@@ -91,7 +91,7 @@ public class AdditionalEquipmentResource {
             log.debug("REST request to get all AdditionalEquipments where car is null");
             return StreamSupport
                 .stream(additionalEquipmentRepository.findAll().spliterator(), false)
-                .filter(additionalEquipment -> additionalEquipment.getCar() == null)
+               
                 .collect(Collectors.toList());
         }
         log.debug("REST request to get all AdditionalEquipments");
