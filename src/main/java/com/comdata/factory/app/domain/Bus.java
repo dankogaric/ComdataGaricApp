@@ -1,12 +1,19 @@
 package com.comdata.factory.app.domain;
 
-import io.swagger.annotations.ApiModel;
+import java.io.Serializable;
+import java.util.Objects;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.Table;
+
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
-import javax.persistence.*;
-import java.io.Serializable;
-import java.util.Objects;
+import com.comdata.factory.app.domain.enums.VehicleType;
 
 /**
  * relationship OneToOne {
@@ -18,14 +25,10 @@ import java.util.Objects;
 @Table(name = "bus")
 @Inheritance(strategy=InheritanceType.JOINED)
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-public class Bus implements Serializable {
+@PrimaryKeyJoinColumn(name = "bus_id", referencedColumnName = "vehicle_id")
+public class Bus extends Vehicle implements Serializable {
 
     private static final long serialVersionUID = 1L;
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="bus_id")
-    private Long id;
 
     @Column(name = "seats_sitting")
     private Integer seatsSitting;
@@ -33,25 +36,29 @@ public class Bus implements Serializable {
     @Column(name = "seats_standing")
     private Integer seatsStanding;
     
-    @Column(name = "color")
-    private String color;
     
-    @ManyToOne(fetch=FetchType.EAGER)
-    private Manufacturer manufacturer;
     
-    @Column(name = "parking_id")
-    protected Integer parkingId;
+	public Bus() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
-    // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
-    public Long getId() {
-        return id;
-    }
+	public Bus(Long id, String color, Integer area, Manufacturer manufacturer, Parking parking,
+			VehicleType vehicleType, Integer seatsSitting, Integer seatsStanding) {
+		super(id, color, area, manufacturer, parking, vehicleType);
+		this.seatsSitting = seatsSitting;
+		this.seatsStanding = seatsStanding;
+	}
+	
+	
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+	public Bus(Integer seatsSitting, Integer seatsStanding) {
+		super();
+		this.seatsSitting = seatsSitting;
+		this.seatsStanding = seatsStanding;
+	}
 
-    public Integer getSeatsSitting() {
+	public Integer getSeatsSitting() {
         return seatsSitting;
     }
 
@@ -105,30 +112,5 @@ public class Bus implements Serializable {
             ", seatsSitting='" + getSeatsSitting() + "'" +
             ", seatsStanding='" + getSeatsStanding() + "'" +
             "}";
-    }
-
-	public String getColor() {
-		return color;
-	}
-
-	public void setColor(String color) {
-		this.color = color;
-	}
-
-	public Manufacturer getManufacturer() {
-		return manufacturer;
-	}
-
-	public void setManufacturer(Manufacturer manufacturer) {
-		this.manufacturer = manufacturer;
-	}
-
-	public Integer getParkingId() {
-		return parkingId;
-	}
-
-	public void setParkingId(Integer parkingId) {
-		this.parkingId = parkingId;
-	}
-    
+    }    
 }

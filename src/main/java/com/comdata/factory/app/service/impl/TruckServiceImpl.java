@@ -1,17 +1,5 @@
 package com.comdata.factory.app.service.impl;
 
-import com.comdata.factory.app.service.TruckService;
-import com.comdata.factory.app.domain.Cabrio;
-import com.comdata.factory.app.domain.Car;
-import com.comdata.factory.app.domain.ClassicCar;
-import com.comdata.factory.app.domain.TankTruck;
-import com.comdata.factory.app.domain.Truck;
-import com.comdata.factory.app.domain.TructorTruck;
-import com.comdata.factory.app.repository.ManufacturerRepository;
-import com.comdata.factory.app.repository.TankTruckRepository;
-import com.comdata.factory.app.repository.TruckRepository;
-import com.comdata.factory.app.repository.TructorTruckRepository;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,6 +9,15 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import com.comdata.factory.app.domain.TankTruck;
+import com.comdata.factory.app.domain.Truck;
+import com.comdata.factory.app.domain.TructorTruck;
+import com.comdata.factory.app.repository.ManufacturerRepository;
+import com.comdata.factory.app.repository.TankTruckRepository;
+import com.comdata.factory.app.repository.TruckRepository;
+import com.comdata.factory.app.repository.TructorTruckRepository;
+import com.comdata.factory.app.service.TruckService;
 
 
 /**
@@ -60,8 +57,10 @@ public class TruckServiceImpl implements TruckService{
 
     	
         if(truck instanceof TructorTruck) {
+        	truck.setArea(TructorTruck.AREA);
         	return tructorTruckRepository.save((TructorTruck)truck);
         } else {
+        	truck.setArea(TankTruck.AREA);
         	return tankTruckRepository.save((TankTruck)truck);
         }
     }
@@ -116,4 +115,9 @@ public class TruckServiceImpl implements TruckService{
         log.debug("Request to delete Truck : {}", id);
         truckRepository.delete(id);
     }
+
+	@Override
+	public Page<Truck> findAll(Pageable pageable) {
+		return truckRepository.findAll(pageable);
+	}
 }

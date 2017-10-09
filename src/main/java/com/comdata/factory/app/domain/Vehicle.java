@@ -4,6 +4,9 @@ import io.swagger.annotations.ApiModel;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
+import com.comdata.factory.app.domain.enums.VehicleType;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
@@ -14,28 +17,52 @@ import java.util.Objects;
 @ApiModel(description = "Basic attributes of every vehicle")
 @Entity
 @Table(name = "vehicle")
+@Inheritance(strategy=InheritanceType.JOINED)
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class Vehicle implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @Id
+    @Column(name = "vehicle_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    protected Long id;
 
     @Column(name = "color")
-    private String color;
+    protected String color;
 
     @Column(name = "area")
-    private Integer area;
+    protected Integer area;
 
-    @ManyToOne
-    private Manufacturer manufacturer;
+    @ManyToOne(fetch=FetchType.EAGER)
+    protected Manufacturer manufacturer;
 
-    @ManyToOne
-    private Parking parking;
+    @ManyToOne(fetch=FetchType.EAGER)
+    protected Parking parking;
+    
+    @Column(name = "vehicle_type")
+    @Enumerated(EnumType.STRING)
+    protected VehicleType vehicleType;
+    
+    
 
-    // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
+    public Vehicle() {
+		super();
+		
+	}
+
+	public Vehicle(Long id, String color, Integer area, Manufacturer manufacturer, Parking parking,
+			VehicleType vehicleType) {
+		super();
+		this.id = id;
+		this.color = color;
+		this.area = area;
+		this.manufacturer = manufacturer;
+		this.parking = parking;
+		this.vehicleType = vehicleType;
+	}
+
+	// jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
     }
@@ -125,4 +152,17 @@ public class Vehicle implements Serializable {
             ", area='" + getArea() + "'" +
             "}";
     }
+
+	public VehicleType getVehicleType() {
+		return vehicleType;
+	}
+
+	public void setVehicleType(VehicleType vehicleType) {
+		this.vehicleType = vehicleType;
+	}
+
+    
+    
+    
+    
 }

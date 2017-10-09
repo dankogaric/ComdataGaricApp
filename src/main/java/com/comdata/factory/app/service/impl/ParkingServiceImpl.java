@@ -1,8 +1,7 @@
 package com.comdata.factory.app.service.impl;
 
-import com.comdata.factory.app.service.VehicleService;
-import com.comdata.factory.app.domain.Vehicle;
-import com.comdata.factory.app.repository.VehicleRepository;
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -10,68 +9,93 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.comdata.factory.app.domain.Bus;
+import com.comdata.factory.app.domain.Parking;
+import com.comdata.factory.app.domain.Truck;
+import com.comdata.factory.app.domain.Vehicle;
+import com.comdata.factory.app.repository.ParkingRepository;
+import com.comdata.factory.app.repository.VehicleRepository;
+import com.comdata.factory.app.service.ParkingService;
+
 
 /**
  * Service Implementation for managing Vehicle.
  */
 @Service
 @Transactional
-public class ParkingServiceImpl implements VehicleService{
+public class ParkingServiceImpl implements ParkingService {
 
     private final Logger log = LoggerFactory.getLogger(ParkingServiceImpl.class);
 
     private final VehicleRepository vehicleRepository;
+    private final ParkingRepository parkingRepository;
 
-    public ParkingServiceImpl(VehicleRepository vehicleRepository) {
-        this.vehicleRepository = vehicleRepository;
-    }
+    
+    
 
-    /**
-     * Save a vehicle.
-     *
-     * @param vehicle the entity to save
-     * @return the persisted entity
-     */
-    @Override
-    public Vehicle save(Vehicle vehicle) {
-        log.debug("Request to save Vehicle : {}", vehicle);
-        return vehicleRepository.save(vehicle);
-    }
+    
 
-    /**
-     *  Get all the vehicles.
-     *
-     *  @param pageable the pagination information
-     *  @return the list of entities
-     */
-    @Override
-    @Transactional(readOnly = true)
-    public Page<Vehicle> findAll(Pageable pageable) {
-        log.debug("Request to get all Vehicles");
-        return vehicleRepository.findAll(pageable);
-    }
+	public ParkingServiceImpl(VehicleRepository vehicleRepository, ParkingRepository parkingRepository) {
+		super();
+		this.vehicleRepository = vehicleRepository;
+		this.parkingRepository = parkingRepository;
+	}
 
-    /**
-     *  Get one vehicle by id.
-     *
-     *  @param id the id of the entity
-     *  @return the entity
-     */
-    @Override
-    @Transactional(readOnly = true)
-    public Vehicle findOne(Long id) {
-        log.debug("Request to get Vehicle : {}", id);
-        return vehicleRepository.findOne(id);
-    }
+	@Override
+	public Parking save(Parking parking) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
-    /**
-     *  Delete the  vehicle by id.
-     *
-     *  @param id the id of the entity
-     */
-    @Override
-    public void delete(Long id) {
-        log.debug("Request to delete Vehicle : {}", id);
-        vehicleRepository.delete(id);
-    }
+	@Override
+	public Parking findOne(Long id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+
+	@Override
+	public Page<Parking> findAll(Pageable pageable) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+
+	@Override
+	public void delete(Long id) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+	@Override
+	public boolean park(Vehicle result) {
+		List<Parking> parkings = null;
+		if((result instanceof Truck || result instanceof Bus )) {
+			parkings = parkingRepository.findByAreaGreaterThanOrderByAreaAsc(30);
+			for (Parking parking : parkings) {
+				if (parking.getRestArea() >= result.getArea()) {
+					result.setParking(parking);
+					parking.setRestArea(parking.getRestArea() - result.getArea());
+					parkingRepository.save(parking);
+					return true;
+				}
+			}
+		} else {
+			parkings = parkingRepository.findAllByOrderByAreaAsc();
+			for (Parking parking : parkings) {
+				if (parking.getRestArea() >= result.getArea()) {
+					result.setParking(parking);
+					parking.setRestArea(parking.getRestArea() - result.getArea());
+					parkingRepository.save(parking);
+					return true;
+				}
+			}
+		}
+		return false;
+		
+	}
 }

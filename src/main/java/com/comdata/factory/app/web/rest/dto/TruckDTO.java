@@ -48,7 +48,7 @@ public class TruckDTO {
 			truckType = TRUCK_TYPE_TRUCTOR;
 			this.horsePower = ((TructorTruck)truckEntity).getHorsePower();
 			
-		} else {
+		} else if(truckEntity instanceof TankTruck) {
 			truckType = TRUCK_TYPE_TANK;
 			this.tankCapacity = ((TankTruck)truckEntity).getTankCapacity();
 		}

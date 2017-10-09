@@ -32,7 +32,27 @@ public class BusDTO {
       roofTopCapacity
       busType
      */
-
+    
+    /**
+     
+     {
+     	    "color": "blue",
+    	"manufacturer": {
+    		"id":1
+    		},
+    		"seatsSitting" : 1,
+    		"seatsStanding": 2,
+    		"hasWhrist": true,
+    		"busType": "CityBus"
+    	}
+        
+    
+    
+    
+     
+     
+     */
+    
 	public BusDTO() {
 		super();	
 	}
@@ -50,7 +70,7 @@ public class BusDTO {
 			busType = BUS_TYPE_CITY;
 			this.hasWhrist = ((CityBus)busEntity).isHasWhrist();
 			
-		} else {
+		} else if (busEntity instanceof InterCityBus) {
 			busType = BUS_TYPE_INTER_CITY;
 			this.trunkCapacity = ((InterCityBus)busEntity).getTrunkCapacity();
 		}

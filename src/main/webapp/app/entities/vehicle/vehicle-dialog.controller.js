@@ -16,6 +16,9 @@
         vm.manufacturers = Manufacturer.query();
         vm.parkings = Parking.query();
 
+        vm.vehicleTypes = ["CLASSIC_CAR", "CABRIO", "CITY_BUS", "INTERCITY_BUS", "TRUCTOR_TRUCK", "TANK_TRUCK"];
+
+
         $timeout(function (){
             angular.element('.form-group:eq(1)>input').focus();
         });

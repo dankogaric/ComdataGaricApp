@@ -1,24 +1,23 @@
 package com.comdata.factory.app.service.impl;
 
-import com.comdata.factory.app.service.BusService;
-import com.comdata.factory.app.domain.Bus;
-import com.comdata.factory.app.domain.Cabrio;
-import com.comdata.factory.app.domain.Car;
-import com.comdata.factory.app.domain.CityBus;
-import com.comdata.factory.app.domain.ClassicCar;
-import com.comdata.factory.app.domain.InterCityBus;
-import com.comdata.factory.app.repository.BusRepository;
-import com.comdata.factory.app.repository.CityBusRepository;
-import com.comdata.factory.app.repository.InterCityBusRepository;
-import com.comdata.factory.app.repository.ManufacturerRepository;
-
 import java.util.ArrayList;
 import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import com.comdata.factory.app.domain.Bus;
+import com.comdata.factory.app.domain.CityBus;
+import com.comdata.factory.app.domain.InterCityBus;
+import com.comdata.factory.app.repository.BusRepository;
+import com.comdata.factory.app.repository.CityBusRepository;
+import com.comdata.factory.app.repository.InterCityBusRepository;
+import com.comdata.factory.app.repository.ManufacturerRepository;
+import com.comdata.factory.app.service.BusService;
 
 
 /**
@@ -54,11 +53,13 @@ public class BusServiceImpl implements BusService{
     public Bus save(Bus bus) {
         log.debug("Request to save Bus : {}", bus);
         bus.setManufacturer(manufacturerRepository.findOne(bus.getManufacturer().getId()));
-
+        
     	
         if(bus instanceof CityBus) {
+        	bus.setArea(CityBus.AREA);
         	return cityBusRepository.save((CityBus)bus);
         } else {
+        	bus.setArea(InterCityBus.AREA);
         	return interCityBusRepository.save((InterCityBus)bus);
         }
     }
@@ -105,4 +106,18 @@ public class BusServiceImpl implements BusService{
         allBuses.addAll(allInterCityBuses);
         return allBuses;
 	}
+	
+	   /**
+     *  Get all the buses.
+     *
+     *  @param pageable the pagination information
+     *  @return the list of entities
+     */
+    @Override
+    @Transactional(readOnly = true)
+    public Page<Bus> findAll(Pageable pageable) {
+        log.debug("Request to get all Buses");
+        return busRepository.findAll(pageable);
+    }
+
 }

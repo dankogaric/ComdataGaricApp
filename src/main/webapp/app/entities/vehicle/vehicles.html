@@ -31,11 +31,9 @@
                     <td><a ui-sref="vehicle-detail({id:vehicle.id})">{{vehicle.id}}</a></td>
                     <td>{{vehicle.color}}</td>
                     <td>{{vehicle.area}}</td>
+                    <td>{{vehicle.manufacturer.name}}</td>
                     <td>
-                        <a ui-sref="manufacturer-detail({id:vehicle.manufacturer.id})">{{vehicle.manufacturer.id}}</a>
-                    </td>
-                    <td>
-                        <a ui-sref="parking-detail({id:vehicle.parking.id})">{{vehicle.parking.id}}</a>
+                        {{vehicle.parking.id}}
                     </td>
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">

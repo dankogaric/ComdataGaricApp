@@ -1,15 +1,11 @@
 package com.comdata.factory.app.web.rest;
 
-import com.codahale.metrics.annotation.Timed;
-import com.comdata.factory.app.domain.Bus;
-import com.comdata.factory.app.domain.Car;
-import com.comdata.factory.app.service.BusService;
-import com.comdata.factory.app.web.rest.dto.BusDTO;
-import com.comdata.factory.app.web.rest.dto.CarDTO;
-import com.comdata.factory.app.web.rest.util.HeaderUtil;
-import com.comdata.factory.app.web.rest.util.PaginationUtil;
-import io.swagger.annotations.ApiParam;
-import io.github.jhipster.web.util.ResponseUtil;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -17,13 +13,24 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import com.codahale.metrics.annotation.Timed;
+import com.comdata.factory.app.domain.Bus;
+import com.comdata.factory.app.service.BusService;
+import com.comdata.factory.app.web.rest.dto.BusDTO;
+import com.comdata.factory.app.web.rest.util.HeaderUtil;
+import com.comdata.factory.app.web.rest.util.PaginationUtil;
+
+import io.github.jhipster.web.util.ResponseUtil;
+import io.swagger.annotations.ApiParam;
 
 /**
  * REST controller for managing Bus.
@@ -93,14 +100,18 @@ public class BusResource {
      */
     @GetMapping("/buses")
     @Timed
-    public List<BusDTO> getAllBuses() {
+    public ResponseEntity<List<BusDTO>> getAllBuses(@ApiParam Pageable pageable) {
         log.debug("REST request to get a page of Buses");
-        List<Bus> allBuses =  busService.findAll();
+        Page<Bus> page = busService.findAll(pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/buses");
+        List<Bus> allBuses =  page.getContent();
+        
+        
         List<BusDTO> allDTOs = new ArrayList<>();
         for(Bus bus: allBuses) {
         	allDTOs.add(new BusDTO(bus));
         }
-        return allDTOs;
+        return new ResponseEntity<>(allDTOs, headers, HttpStatus.OK);
     }
 
     /**

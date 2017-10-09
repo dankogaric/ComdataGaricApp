@@ -3,6 +3,8 @@ package com.comdata.factory.app.domain;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
+import com.comdata.factory.app.domain.enums.VehicleType;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
@@ -21,8 +23,25 @@ public class ClassicCar extends Car implements Serializable {
 
     @Column(name = "roof_top_capacity")
     private Integer roofTopCapacity;
+    
+    
 
-    public Integer getRoofTopCapacity() {
+    public ClassicCar() {
+		super();
+		vehicleType = VehicleType.CLASSIC_CAR;
+	}
+    
+    
+	public ClassicCar(Long id, String color, Integer area, Manufacturer manufacturer, Parking parking,
+			VehicleType vehicleType, Integer seatsNumber, AdditionalEquipment addEq, Integer roofTopCapacity) {
+		super(id, color, area, manufacturer, parking, vehicleType, seatsNumber, addEq);
+		this.roofTopCapacity = roofTopCapacity;
+
+	}
+
+
+
+	public Integer getRoofTopCapacity() {
         return roofTopCapacity;
     }
 

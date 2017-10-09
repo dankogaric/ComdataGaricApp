@@ -1,13 +1,26 @@
 package com.comdata.factory.app.domain;
 
-import io.swagger.annotations.ApiModel;
+import java.io.Serializable;
+import java.util.Objects;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.ManyToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.Table;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
-import javax.persistence.*;
-import javax.validation.constraints.*;
-import java.io.Serializable;
-import java.util.Objects;
+import com.comdata.factory.app.domain.enums.VehicleType;
 
 /**
  * A bus
@@ -16,39 +29,40 @@ import java.util.Objects;
 @Table(name = "truck")
 @Inheritance(strategy=InheritanceType.JOINED)
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-public class Truck implements Serializable {
+@PrimaryKeyJoinColumn(name = "truck_id", referencedColumnName = "vehicle_id")
+public class Truck extends Vehicle implements Serializable {
 
     private static final long serialVersionUID = 1L;
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="truck_id")
-    private Long id;
 
     @Min(value = 2)
     @Max(value = 4)
     @Column(name = "number_of_axles")
     private Integer numberOfAxles;
     
-    @Column(name = "color")
-    private String color;
     
-    @ManyToOne(fetch=FetchType.EAGER)
-    private Manufacturer manufacturer;
+
+    public Truck() {
+		super();
+		
+	}
     
-    @Column(name = "parking_id")
-    protected Integer parkingId;
+    
 
-    // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
-    public Long getId() {
-        return id;
-    }
+	public Truck(Integer numberOfAxles) {
+		super();
+		this.numberOfAxles = numberOfAxles;
+	}
 
-    public void setId(Long id) {
-        this.id = id;
-    }
 
-    public Integer getNumberOfAxles() {
+
+	public Truck(Long id, String color, Integer area, Manufacturer manufacturer, Parking parking,
+			VehicleType vehicleType, Integer numberOfAxles) {
+		super(id, color, area, manufacturer, parking, vehicleType);
+		this.numberOfAxles = numberOfAxles;
+		
+	}
+
+	public Integer getNumberOfAxles() {
         return numberOfAxles;
     }
 
@@ -89,31 +103,6 @@ public class Truck implements Serializable {
             ", numberOfAxles='" + getNumberOfAxles() + "'" +
             "}";
     }
-
-	public String getColor() {
-		return color;
-	}
-
-	public void setColor(String color) {
-		this.color = color;
-	}
-
-	public Manufacturer getManufacturer() {
-		return manufacturer;
-	}
-
-	public void setManufacturer(Manufacturer manufacturer) {
-		this.manufacturer = manufacturer;
-	}
-
-	public Integer getParkingId() {
-		return parkingId;
-	}
-
-	public void setParkingId(Integer parkingId) {
-		this.parkingId = parkingId;
-	}
-    
-    
+ 
     
 }

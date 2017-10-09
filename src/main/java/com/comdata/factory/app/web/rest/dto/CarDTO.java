@@ -67,7 +67,7 @@ public class CarDTO {
 			carType = CAR_TYPE_CLASSIC;
 			this.roofTopCapacity = ((ClassicCar)carEntity).getRoofTopCapacity();
 			
-		} else {
+		} else if (carEntity instanceof Cabrio) {
 			carType = CAR_TYPE_CABRIO;
 			this.hasRemovableRoof = ((Cabrio)carEntity).isHasRemovableRoof();
 		}

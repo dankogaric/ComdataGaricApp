@@ -1,6 +1,8 @@
 package com.comdata.factory.app.service;
 
 import com.comdata.factory.app.domain.Parking;
+import com.comdata.factory.app.domain.Vehicle;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -39,4 +41,10 @@ public interface ParkingService {
      *  @param id the id of the entity
      */
     void delete(Long id);
+    
+    /**
+     * Parks the vehicle according to pre-defined criteria 
+     * @param result
+     */
+	boolean park(Vehicle result);
 }

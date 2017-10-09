@@ -1,11 +1,17 @@
 package com.comdata.factory.app.domain;
 
+import java.io.Serializable;
+import java.util.Objects;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.Table;
+
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
-import javax.persistence.*;
-import java.io.Serializable;
-import java.util.Objects;
+import com.comdata.factory.app.domain.enums.VehicleType;
 
 /**
  * A InterCityBus.
@@ -17,11 +23,37 @@ import java.util.Objects;
 public class InterCityBus extends Bus implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    public static final int AREA = 15;
+    
+    
     @Column(name = "trunk_capacity")
     private Integer trunkCapacity;
+    
+    
 
 
-    public Integer getTrunkCapacity() {
+    public InterCityBus(Integer trunkCapacity) {
+		super();
+		this.trunkCapacity = trunkCapacity;
+	}
+
+	public InterCityBus(Integer seatsSitting, Integer seatsStanding) {
+		super(seatsSitting, seatsStanding);
+
+	}
+
+	public InterCityBus(Long id, String color, Integer area, Manufacturer manufacturer, Parking parking,
+			VehicleType vehicleType, Integer seatsSitting, Integer seatsStanding, Integer trunkCapacity) {
+		super(id, color, area, manufacturer, parking, vehicleType, seatsSitting, seatsStanding);
+		this.trunkCapacity = trunkCapacity;
+	}
+
+	public InterCityBus() {
+		super();
+		vehicleType = VehicleType.INTERCITY_BUS;
+	}
+
+	public Integer getTrunkCapacity() {
         return trunkCapacity;
     }
 

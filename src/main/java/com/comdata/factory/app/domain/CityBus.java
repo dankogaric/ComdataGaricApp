@@ -3,6 +3,8 @@ package com.comdata.factory.app.domain;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
+import com.comdata.factory.app.domain.enums.VehicleType;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
@@ -17,11 +19,43 @@ import java.util.Objects;
 public class CityBus extends Bus implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    public static final int AREA = 30;
 
     @Column(name = "has_whrist")
     private Boolean hasWhrist;
+    
+    
 
-    public Boolean isHasWhrist() {
+    public CityBus() {
+		super();
+		vehicleType = VehicleType.CITY_BUS;
+	}
+    
+ 
+
+	public CityBus(Integer seatsSitting, Integer seatsStanding) {
+		super(seatsSitting, seatsStanding);
+		// TODO Auto-generated constructor stub
+	}
+
+
+
+	public CityBus(Long id, String color, Integer area, Manufacturer manufacturer, Parking parking,
+			VehicleType vehicleType, Integer seatsSitting, Integer seatsStanding, Boolean hasWhrist) {
+		super(id, color, area, manufacturer, parking, vehicleType, seatsSitting, seatsStanding);
+		this.hasWhrist = hasWhrist;
+	}
+
+	
+
+	public CityBus(Boolean hasWhrist) {
+		super();
+		this.hasWhrist = hasWhrist;
+	}
+
+
+
+	public Boolean isHasWhrist() {
         return hasWhrist;
     }
 

@@ -5,6 +5,8 @@ import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -59,6 +61,7 @@ public class CarServiceImpl implements CarService{
         
     	if(car.getAddEq().getId() == null) {
     		car.setAddEq(additionalEquipmentRepository.save(car.getAddEq()));
+    		car.setArea(Car.AREA);
     	}
     	
     	car.setManufacturer(manufacturerRepository.findOne(car.getManufacturer().getId()));
@@ -121,4 +124,10 @@ public class CarServiceImpl implements CarService{
         log.debug("Request to delete Car : {}", id);
         carRepository.delete(id);
     }
+
+	@Override
+	public Page<Car> findAll(Pageable pageable) {
+		Page<Car> cars = carRepository.findAll(pageable);
+		return cars;
+	}
 }

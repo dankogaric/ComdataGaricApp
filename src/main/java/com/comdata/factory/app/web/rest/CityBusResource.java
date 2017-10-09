@@ -1,12 +1,11 @@
 package com.comdata.factory.app.web.rest;
 
-import com.codahale.metrics.annotation.Timed;
-import com.comdata.factory.app.domain.CityBus;
-import com.comdata.factory.app.service.CityBusService;
-import com.comdata.factory.app.web.rest.util.HeaderUtil;
-import com.comdata.factory.app.web.rest.util.PaginationUtil;
-import io.swagger.annotations.ApiParam;
-import io.github.jhipster.web.util.ResponseUtil;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -14,13 +13,25 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.net.URI;
-import java.net.URISyntaxException;
+import com.codahale.metrics.annotation.Timed;
+import com.comdata.factory.app.domain.Bus;
+import com.comdata.factory.app.domain.CityBus;
+import com.comdata.factory.app.service.CityBusService;
+import com.comdata.factory.app.web.rest.dto.BusDTO;
+import com.comdata.factory.app.web.rest.util.HeaderUtil;
+import com.comdata.factory.app.web.rest.util.PaginationUtil;
 
-import java.util.List;
-import java.util.Optional;
+import io.github.jhipster.web.util.ResponseUtil;
+import io.swagger.annotations.ApiParam;
 
 /**
  * REST controller for managing CityBus.
@@ -81,6 +92,31 @@ public class CityBusResource {
             .body(result);
     }
 
+    
+    
+    
+    
+    /*
+    
+        @GetMapping("/cars")
+    @Timed
+    public ResponseEntity<List<CarDTO>> getAllCars(@ApiParam Pageable pageable) {
+        log.debug("REST request to get all Cars");
+        Page<Car> page =  carService.findAll(pageable);
+       List<Car> allCars = page.getContent();
+        List<CarDTO> allDTOs = new ArrayList<>();
+        for(Car car : allCars) {
+        	allDTOs.add(new CarDTO(car));
+        }
+        
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/cars");
+        
+        return new ResponseEntity<>(allDTOs, headers, HttpStatus.OK);    
+    }
+    
+    
+    */
+    
     /**
      * GET  /city-buses : get all the cityBuses.
      *
@@ -89,10 +125,18 @@ public class CityBusResource {
      */
     @GetMapping("/city-buses")
     @Timed
-    public List<CityBus> getAllCityBuses() {
+    public ResponseEntity<List<BusDTO>> getAllCityBuses(@ApiParam Pageable pageable) {
         log.debug("REST request to get a page of CityBuses");
-        List<CityBus> buses = cityBusService.findAll();
-        return buses;
+        Page<CityBus> page = cityBusService.findAllPage(pageable);
+        List<CityBus> buses = page.getContent();
+        List<BusDTO> allDTOs = new ArrayList<>();
+        for(Bus bus : buses) {
+        	allDTOs.add(new BusDTO(bus));
+        }
+        
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/city-buses");
+        
+        return new ResponseEntity<>(allDTOs, headers, HttpStatus.OK); 
     }
 
     /**

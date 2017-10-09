@@ -3,6 +3,8 @@ package com.comdata.factory.app.domain;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
+import com.comdata.factory.app.domain.enums.VehicleType;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
@@ -14,15 +16,11 @@ import java.util.Objects;
 @Table(name = "car")
 @Inheritance(strategy=InheritanceType.JOINED)
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-public class Car implements Serializable {
+@PrimaryKeyJoinColumn(name = "car_id", referencedColumnName = "vehicle_id")
+public class Car extends Vehicle implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    private static final long area = 8;
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="car_id")
-    protected Long id;
+    public static final int AREA = 8;
 
     @Column(name = "seats_number")
     protected Integer seatsNumber;
@@ -31,25 +29,24 @@ public class Car implements Serializable {
     @JoinColumn(unique = true)
     protected AdditionalEquipment addEq;
     
-    @Column(name = "color")
-    protected String color;
     
-    @ManyToOne(fetch=FetchType.EAGER)
-    private Manufacturer manufacturer;
+
+    public Car() {
+		super();
+		
+	}
     
-    @Column(name = "parking_id")
-    protected Integer parkingId;
 
-    // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
-    public Long getId() {
-        return id;
-    }
+	public Car(Long id, String color, Integer area, Manufacturer manufacturer, Parking parking,
+			VehicleType vehicleType, Integer seatsNumber, AdditionalEquipment addEq) {
+		super(id, color, area, manufacturer, parking, vehicleType);
+		this.seatsNumber = seatsNumber;
+		this.addEq = addEq;
+	}
 
-    public void setId(Long id) {
-        this.id = id;
-    }
 
-    public Integer getSeatsNumber() {
+
+	public Integer getSeatsNumber() {
         return seatsNumber;
     }
 
@@ -76,13 +73,7 @@ public class Car implements Serializable {
     }
  
     
-    public Manufacturer getManufacturer() {
-		return manufacturer;
-	}
 
-	public void setManufacturer(Manufacturer manufacturer) {
-		this.manufacturer = manufacturer;
-	}
 
 	@Override
     public boolean equals(Object o) {
@@ -112,21 +103,5 @@ public class Car implements Serializable {
             "}";
     }
 
-	public String getColor() {
-		return color;
-	}
-
-	public void setColor(String color) {
-		this.color = color;
-	}
-
-	public Integer getParkingId() {
-		return parkingId;
-	}
-
-	public void setParkingId(Integer parkingId) {
-		this.parkingId = parkingId;
-	}
-    
     
 }

@@ -3,6 +3,8 @@ package com.comdata.factory.app.domain;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
+import com.comdata.factory.app.domain.enums.VehicleType;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
@@ -21,8 +23,21 @@ public class Cabrio extends Car implements Serializable {
 
     @Column(name = "has_removable_roof")
     private Boolean hasRemovableRoof;
+    
+	public Cabrio() {
+		super();
+		vehicleType = VehicleType.CABRIO;
+	}
 
-    public Boolean isHasRemovableRoof() {
+    
+	public Cabrio(Long id, String color, Integer area, Manufacturer manufacturer, Parking parking,
+			VehicleType vehicleType, Integer seatsNumber, AdditionalEquipment addEq, Boolean hasRemovableRoof) {
+		super(id, color, area, manufacturer, parking, vehicleType, seatsNumber, addEq);
+		this.hasRemovableRoof = hasRemovableRoof;
+	}
+
+
+	public Boolean isHasRemovableRoof() {
         return hasRemovableRoof;
     }
 

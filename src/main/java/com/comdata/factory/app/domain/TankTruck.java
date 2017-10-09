@@ -1,11 +1,17 @@
 package com.comdata.factory.app.domain;
 
+import java.io.Serializable;
+import java.util.Objects;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.Table;
+
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
-import javax.persistence.*;
-import java.io.Serializable;
-import java.util.Objects;
+import com.comdata.factory.app.domain.enums.VehicleType;
 
 /**
  * A TankTruck.
@@ -17,12 +23,36 @@ import java.util.Objects;
 public class TankTruck extends Truck implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    public static final int AREA = 20;
 
     @Column(name = "tank_capacity")
     private Integer tankCapacity;
 
+    
 
-    public Integer getTankCapacity() {
+    public TankTruck() {
+		super();
+		vehicleType = VehicleType.TANK_TRUCK;
+	}
+    
+    
+
+	public TankTruck(Integer tankCapacity) {
+		super();
+		this.tankCapacity = tankCapacity;
+	}
+
+
+
+	public TankTruck(Long id, String color, Integer area, Manufacturer manufacturer, Parking parking,
+			VehicleType vehicleType, Integer numberOfAxles, Integer tankCapacity) {
+		super(id, color, area, manufacturer, parking, vehicleType, numberOfAxles);
+		this.tankCapacity = tankCapacity;
+	}
+
+
+
+	public Integer getTankCapacity() {
         return tankCapacity;
     }
 

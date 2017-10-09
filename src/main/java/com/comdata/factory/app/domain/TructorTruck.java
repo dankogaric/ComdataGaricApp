@@ -3,6 +3,8 @@ package com.comdata.factory.app.domain;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
+import com.comdata.factory.app.domain.enums.VehicleType;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
@@ -17,11 +19,38 @@ import java.util.Objects;
 public class TructorTruck extends Truck implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    public static final int AREA = 15;
 
     @Column(name = "horse_power")
     private Integer horsePower;
+    
+    
 
-    public Integer getHorsePower() {
+    public TructorTruck() {
+		super();
+		vehicleType = VehicleType.TRUCTOR_TRUCK;
+	}
+    
+    
+
+	public TructorTruck(Integer horsePower) {
+		super();
+		this.horsePower = horsePower;
+	}
+	
+	
+
+
+
+	public TructorTruck(Long id, String color, Integer area, Manufacturer manufacturer, Parking parking,
+			VehicleType vehicleType, Integer numberOfAxles, Integer horsePower) {
+		super(id, color, area, manufacturer, parking, vehicleType, numberOfAxles);
+		this.horsePower = horsePower;
+	}
+
+
+
+	public Integer getHorsePower() {
         return horsePower;
     }
 

@@ -8,6 +8,10 @@ import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,13 +23,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.codahale.metrics.annotation.Timed;
+import com.comdata.factory.app.domain.Bus;
 import com.comdata.factory.app.domain.Car;
 import com.comdata.factory.app.service.CarService;
 import com.comdata.factory.app.service.ParkingService;
+import com.comdata.factory.app.web.rest.dto.BusDTO;
 import com.comdata.factory.app.web.rest.dto.CarDTO;
 import com.comdata.factory.app.web.rest.util.HeaderUtil;
+import com.comdata.factory.app.web.rest.util.PaginationUtil;
 
 import io.github.jhipster.web.util.ResponseUtil;
+import io.swagger.annotations.ApiParam;
 
 /**
  * REST controller for managing Car.
@@ -94,6 +102,7 @@ public class CarResource {
             .body(new CarDTO(result));
     }
 
+    
     /**
      * GET  /cars : get all the cars.
      *
@@ -101,15 +110,18 @@ public class CarResource {
      */
     @GetMapping("/cars")
     @Timed
-    public List<CarDTO> getAllCars() {
+    public ResponseEntity<List<CarDTO>> getAllCars(@ApiParam Pageable pageable) {
         log.debug("REST request to get all Cars");
-        List<Car> allCars =  carService.findAll();
+        Page<Car> page =  carService.findAll(pageable);
+       List<Car> allCars = page.getContent();
         List<CarDTO> allDTOs = new ArrayList<>();
         for(Car car : allCars) {
         	allDTOs.add(new CarDTO(car));
         }
-        return allDTOs;
-    
+        
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/cars");
+        
+        return new ResponseEntity<>(allDTOs, headers, HttpStatus.OK);    
     }
 
     /**
@@ -123,6 +135,8 @@ public class CarResource {
     public ResponseEntity<CarDTO> getCar(@PathVariable Long id) {
         log.debug("REST request to get Car : {}", id);
         Car car = carService.findOne(id);
+        
+        
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(new CarDTO(car)));
     }
 

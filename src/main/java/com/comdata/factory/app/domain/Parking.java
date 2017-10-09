@@ -33,7 +33,22 @@ public class Parking implements Serializable {
     @Column(name = "has_roof")
     private Boolean hasRoof;
 
-    // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
+    public Parking() {
+    	
+    }
+    
+    public Parking(Parking parking) {
+    	if(parking == null) {
+    		return;
+    	}
+    	this.id = parking.id;
+		this.area = parking.area;
+		this.height = parking.height;
+		this.restArea = parking.restArea;
+		this.hasRoof = parking.hasRoof;
+	}
+
+	// jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
     }
