@@ -89,11 +89,10 @@ public class TankTruckResource {
      */
     @GetMapping("/tank-trucks")
     @Timed
-    public ResponseEntity<List<TankTruck>> getAllTankTrucks(@ApiParam Pageable pageable) {
+    public List<TankTruck> getAllTankTrucks() {
         log.debug("REST request to get a page of TankTrucks");
-        Page<TankTruck> page = tankTruckService.findAll(pageable);
-        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/tank-trucks");
-        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+        List<TankTruck> trucks = tankTruckService.findAll();
+        return trucks;
     }
 
     /**

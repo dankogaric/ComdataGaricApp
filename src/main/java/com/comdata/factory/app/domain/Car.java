@@ -17,6 +17,7 @@ import java.util.Objects;
 public class Car implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    private static final long area = 8;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,6 +36,9 @@ public class Car implements Serializable {
     
     @ManyToOne(fetch=FetchType.EAGER)
     private Manufacturer manufacturer;
+    
+    @Column(name = "parking_id")
+    protected Integer parkingId;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -114,6 +118,14 @@ public class Car implements Serializable {
 
 	public void setColor(String color) {
 		this.color = color;
+	}
+
+	public Integer getParkingId() {
+		return parkingId;
+	}
+
+	public void setParkingId(Integer parkingId) {
+		this.parkingId = parkingId;
 	}
     
     

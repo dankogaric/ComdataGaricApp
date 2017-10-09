@@ -2,6 +2,7 @@ package com.comdata.factory.app.service.impl;
 
 import com.comdata.factory.app.service.TankTruckService;
 import com.comdata.factory.app.domain.TankTruck;
+import com.comdata.factory.app.domain.Vehicle;
 import com.comdata.factory.app.repository.TankTruckRepository;
 
 import java.util.List;
@@ -52,6 +53,14 @@ public class TankTruckServiceImpl implements TankTruckService{
     public List<TankTruck> findAll() {
         log.debug("Request to get all TankTrucks");
         return tankTruckRepository.findAll();
+    }
+
+    
+    @Override
+    @Transactional(readOnly = true)
+    public Page<TankTruck> findAll(Pageable pageable) {
+        log.debug("Request to get all Vehicles");
+        return tankTruckRepository.findAll(pageable);
     }
 
     /**

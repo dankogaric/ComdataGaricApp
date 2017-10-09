@@ -1,45 +1,40 @@
 package com.comdata.factory.app.service;
 
-import com.comdata.factory.app.domain.TankTruck;
-
-import java.util.List;
-
+import com.comdata.factory.app.domain.Parking;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 /**
- * Service Interface for managing TankTruck.
+ * Service Interface for managing Parking.
  */
-public interface TankTruckService {
+public interface ParkingService {
 
     /**
-     * Save a tankTruck.
+     * Save a parking.
      *
-     * @param tankTruck the entity to save
+     * @param parking the entity to save
      * @return the persisted entity
      */
-    TankTruck save(TankTruck tankTruck);
+    Parking save(Parking parking);
 
     /**
-     *  Get all the tankTrucks.
+     *  Get all the parkings.
      *
      *  @param pageable the pagination information
      *  @return the list of entities
      */
-    List<TankTruck> findAll();
-    
-    public Page<TankTruck> findAll(Pageable pageable);
+    Page<Parking> findAll(Pageable pageable);
 
     /**
-     *  Get the "id" tankTruck.
+     *  Get the "id" parking.
      *
      *  @param id the id of the entity
      *  @return the entity
      */
-    TankTruck findOne(Long id);
+    Parking findOne(Long id);
 
     /**
-     *  Delete the "id" tankTruck.
+     *  Delete the "id" parking.
      *
      *  @param id the id of the entity
      */

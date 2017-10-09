@@ -27,6 +27,8 @@ public interface CityBusService {
      *  @return the list of entities
      */
     List<CityBus> findAll();
+    
+    Page<CityBus> findAllPage(Pageable pageable);
 
     /**
      *  Get the "id" cityBus.

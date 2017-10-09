@@ -89,11 +89,10 @@ public class CityBusResource {
      */
     @GetMapping("/city-buses")
     @Timed
-    public ResponseEntity<List<CityBus>> getAllCityBuses(@ApiParam Pageable pageable) {
+    public List<CityBus> getAllCityBuses() {
         log.debug("REST request to get a page of CityBuses");
-        Page<CityBus> page = cityBusService.findAll(pageable);
-        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/city-buses");
-        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+        List<CityBus> buses = cityBusService.findAll();
+        return buses;
     }
 
     /**

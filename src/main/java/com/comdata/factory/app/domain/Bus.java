@@ -36,8 +36,11 @@ public class Bus implements Serializable {
     @Column(name = "color")
     private String color;
     
-    @ManyToOne
+    @ManyToOne(fetch=FetchType.EAGER)
     private Manufacturer manufacturer;
+    
+    @Column(name = "parking_id")
+    protected Integer parkingId;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -118,6 +121,14 @@ public class Bus implements Serializable {
 
 	public void setManufacturer(Manufacturer manufacturer) {
 		this.manufacturer = manufacturer;
+	}
+
+	public Integer getParkingId() {
+		return parkingId;
+	}
+
+	public void setParkingId(Integer parkingId) {
+		this.parkingId = parkingId;
 	}
     
 }

@@ -53,6 +53,14 @@ public class CityBusServiceImpl implements CityBusService{
         log.debug("Request to get all CityBuses");
         return cityBusRepository.findAll();
     }
+    
+    
+    @Override
+    @Transactional(readOnly = true)
+    public Page<CityBus> findAllPage(Pageable pageable) {
+        log.debug("Request to get all Vehicles");
+        return cityBusRepository.findAll(pageable);
+    }
 
     /**
      *  Get one cityBus by id.

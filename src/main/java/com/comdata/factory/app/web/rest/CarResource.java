@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.codahale.metrics.annotation.Timed;
 import com.comdata.factory.app.domain.Car;
 import com.comdata.factory.app.service.CarService;
+import com.comdata.factory.app.service.ParkingService;
 import com.comdata.factory.app.web.rest.dto.CarDTO;
 import com.comdata.factory.app.web.rest.util.HeaderUtil;
 
@@ -38,12 +39,17 @@ public class CarResource {
     private static final String ENTITY_NAME = "car";
 
     private final CarService carService;
+    private final ParkingService parkingService;
 
-    public CarResource(CarService carService) {
-        this.carService = carService;
-    }
+ 
 
-    /**
+    public CarResource(CarService carService, ParkingService parkingService) {
+		super();
+		this.carService = carService;
+		this.parkingService = parkingService;
+	}
+
+	/**
      * POST  /cars : Create a new car.
      *
      * @param car the car to create
@@ -58,6 +64,9 @@ public class CarResource {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert(ENTITY_NAME, "idexists", "A new car cannot already have an ID")).body(null);
         }
         Car result = carService.save(dto.convertToCarEntity());
+        if (result != null) {
+        	
+        }
         return ResponseEntity.created(new URI("/api/cars/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
             .body(result);
