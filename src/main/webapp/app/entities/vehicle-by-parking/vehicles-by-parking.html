@@ -1,0 +1,46 @@
+<div>
+    <h2>Vehicles By Parking</h2>
+    <jhi-alert></jhi-alert>
+    <div class="container-fluid">
+        <select name="parkingId" id="field_parkingId" ng-model="vm.parkingId">
+            <option value="">---Please select---</option>
+            <!-- not selected / blank option -->
+            <option ng-repeat="parking in vm.parkings track by parking.id" value="{{parking.id}}">Parking {{parking.id}}</option>
+            <!-- interpolation -->
+            <!-- <option value="{{vm.parkingIds[0]}}">Parking {{vm.parkingIds[0]}}</option>
+            <option value="{{vm.parkingIds[1]}}">Parking {{vm.parkingIds[1]}}</option>
+            <option value="{{vm.parkingIds[2]}}">Parking {{vm.parkingIds[2]}}</option>-->
+        </select>
+
+    </div>
+    <br/>
+    <div class="table-responsive">
+        <table class="jh-table table table-striped">
+            <thead>
+                <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
+                    <th><span>ID</span></th>
+                    <th><span>Color</span></th>
+                    <th><span>Area</span></th>
+                    <th><span>Manufacturer</span></th>
+                    <th><span>Parking</span></th>
+                    <th><span>Vehicle type</span></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="vehicle in vm.vehicles track by vehicle.id">
+                    <td>{{vehicle.id}}</a></td>
+                    <td>{{vehicle.color}}</td>
+                    <td>{{vehicle.area}}</td>
+                    <td>{{vehicle.manufacturer.name}}</td>
+                    <td>{{vehicle.parking.id}}</td>
+                    <td>{{vehicle.vehicleType}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="text-center">
+        <jhi-item-count page="vm.page" total="vm.queryCount" items-per-page="vm.itemsPerPage"></jhi-item-count>
+        <uib-pagination class="pagination-sm" total-items="vm.totalItems" items-per-page="vm.itemsPerPage" ng-model="vm.page" ng-change="vm.transition()"></uib-pagination>
+    </div>
+</div>

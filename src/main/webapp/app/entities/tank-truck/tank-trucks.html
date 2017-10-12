@@ -19,15 +19,21 @@
             <thead>
                 <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
                     <th jh-sort-by="id"><span>ID</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="color"><span>Color</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="manufacturer.name"><span>Manufacturer</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="numberOfAxles"><span>Number Of Axles</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="tankCapacity"><span>Tank Capacity</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th></th>
                 </tr>
             </thead>
             <tbody>
                 <tr ng-repeat="tankTruck in vm.tankTrucks track by tankTruck.id">
-                    <td><a ui-sref="tank-truck-detail({id:tankTruck.id})">{{tankTruck.id}}</a></td>
+                    <td>{{tankTruck.id}}</td>
+                    <td>{{tankTruck.color}}</td>
+                    <td>{{tankTruck.manufacturer.name}}</td>
+                    <td>{{tankTruck.numberOfAxles}}</td>
                     <td>{{tankTruck.tankCapacity}}</td>
-                    <td class="text-right">
+                    <!--<td class="text-right">
                         <div class="btn-group flex-btn-group-container">
                             <button type="submit"
                                     ui-sref="tank-truck-detail({id:tankTruck.id})"
@@ -48,7 +54,7 @@
                                 <span class="hidden-sm-down"></span>
                             </button>
                         </div>
-                    </td>
+                    </td>-->
                 </tr>
             </tbody>
         </table>

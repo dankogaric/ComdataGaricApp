@@ -217,7 +217,7 @@ public class VehicleResource {
     @GetMapping("/vehicles")
     @Timed
 	public ResponseEntity<List<VehicleDTO>> getAllVehicles(@ApiParam Pageable pageable) {
-		log.debug("REST request to get a page of Vehicles");
+		log.debug("REST request to get a  of Vehicles");
 		Page<Vehicle> page = vehicleService.findAll(pageable);
 		List<VehicleDTO> allDTOs = new ArrayList<>();
 		List<Vehicle> allVehicles = page.getContent();
@@ -226,7 +226,32 @@ public class VehicleResource {
 			allDTOs.add(new VehicleDTO(vehicle));
 		}
 
-		HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/cars");
+		HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/vehicles");
+
+		return new ResponseEntity<>(allDTOs, headers, HttpStatus.OK);
+	}
+    
+    
+    /**
+     * GET  /vehicles : get vehicles per parking.
+     *
+     * @param pageable the pagination information
+     * @return the ResponseEntity with status 200 (OK) and the list of vehicles in body
+     */
+    @GetMapping("/vehicles-by-parking/{id}")
+    @Timed
+	public ResponseEntity<List<VehicleDTO>> getVehiclesPerParking(@PathVariable("id") String parkingId, @ApiParam Pageable pageable) {
+		log.debug("REST request to get a page of Vehicles");
+		Page<Vehicle> page = vehicleService.findVehiclesByParkingId(Long.parseLong(parkingId), pageable);
+		List<VehicleDTO> allDTOs = new ArrayList<>();
+
+		List<Vehicle> allVehicles = page.getContent();
+		
+		for (Vehicle vehicle : allVehicles) {
+			allDTOs.add(new VehicleDTO(vehicle));
+		}
+
+		HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/vehicles-by-parking");
 
 		return new ResponseEntity<>(allDTOs, headers, HttpStatus.OK);
 	}

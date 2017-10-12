@@ -4,6 +4,7 @@ import com.comdata.factory.app.domain.CityBus;
 import com.comdata.factory.app.domain.InterCityBus;
 import com.comdata.factory.app.domain.Bus;
 import com.comdata.factory.app.domain.Manufacturer;
+import com.comdata.factory.app.domain.enums.VehicleType;
 
 public class BusDTO {
 	/**
@@ -22,7 +23,7 @@ public class BusDTO {
     private Manufacturer manufacturer;
     
     
-    private String busType;
+    private String vehicleType;
 
     /**
       "seatsNumber": 4,
@@ -67,11 +68,11 @@ public class BusDTO {
 		this.manufacturer.setName(busEntity.getManufacturer().getName());
 			
 		if(busEntity instanceof CityBus) {
-			busType = BUS_TYPE_CITY;
+			this.vehicleType = busEntity.getVehicleType().toString();
 			this.hasWhrist = ((CityBus)busEntity).isHasWhrist();
 			
 		} else if (busEntity instanceof InterCityBus) {
-			busType = BUS_TYPE_INTER_CITY;
+			this.vehicleType = busEntity.getVehicleType().toString();
 			this.trunkCapacity = ((InterCityBus)busEntity).getTrunkCapacity();
 		}
 		
@@ -80,7 +81,7 @@ public class BusDTO {
 
 	public Bus convertToBusEntity () {
 		// determine which type of bus is this
-		if(busType.equals(BUS_TYPE_CITY)) {
+		if(vehicleType.equals(BUS_TYPE_CITY)) {
 			CityBus returnValue = new CityBus();
 			returnValue.setId(id);
 			returnValue.setHasWhrist(hasWhrist);
@@ -88,6 +89,7 @@ public class BusDTO {
 			returnValue.setSeatsStanding(seatsStanding);
 			returnValue.setManufacturer(manufacturer);
 			returnValue.setColor(color);
+			returnValue.setVehicleType(VehicleType.CITY_BUS);
 			return returnValue;
 			
 		} else {
@@ -98,6 +100,7 @@ public class BusDTO {
 			returnValue.setSeatsStanding(seatsStanding);
 			returnValue.setManufacturer(manufacturer);
 			returnValue.setColor(color);
+			returnValue.setVehicleType(VehicleType.INTERCITY_BUS);
 			return returnValue;
 		}	
 	}
@@ -119,21 +122,18 @@ public class BusDTO {
 	}
 
 
-	public String getBusType() {
-		return busType;
+
+
+
+
+
+	public String getVehicleType() {
+		return vehicleType;
 	}
 
-
-
-
-
-	public void setBusType(String busType) {
-		this.busType = busType;
+	public void setVehicleType(String vehicleType) {
+		this.vehicleType = vehicleType;
 	}
-
-
-
-
 
 	public Manufacturer getManufacturer() {
 		return manufacturer;

@@ -1,0 +1,171 @@
+<form name="editForm" role="form" novalidate ng-submit="vm.save()">
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true" ng-click="vm.clear()">&times;</button>
+        <h4 class="modal-title" id="myVehicleLabel">Create or edit a Vehicle</h4>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" ng-show="vm.vehicle.id">
+            <label for="id">ID</label>
+            <input type="text" class="form-control" id="id" name="id" ng-model="vm.vehicle.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_color">Color</label>
+            <input type="text" class="form-control" name="color" id="field_color" ng-model="vm.vehicle.color" />
+        </div>
+
+        <div class="form-group">
+            <label for="field_manufacturer">Manufacturer</label>
+            <select class="form-control" id="field_manufacturer" name="manufacturer" ng-model="vm.vehicle.manufacturer" ng-options="manufacturer as manufacturer.name for manufacturer in vm.manufacturers track by manufacturer.id">
+                <option value=""></option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label" for="field_vehicleType">Select vehicle type:</label>
+
+            <select name="vehicleType" id="field_vehicleType" ng-disabled="vm.vehicle.id != null" ng-model="vm.vehicle.vehicleType">
+                <option value="">---Please select---</option>
+                <!-- not selected / blank option -->
+                <option value="{{vm.vehicleTypes[0]}}">{{vm.vehicleTypes[0]}}</option>
+                <!-- interpolation -->
+                <option value="{{vm.vehicleTypes[1]}}">{{vm.vehicleTypes[1]}}</option>
+                <option value="{{vm.vehicleTypes[2]}}">{{vm.vehicleTypes[2]}}</option>
+                <option value="{{vm.vehicleTypes[3]}}">{{vm.vehicleTypes[3]}}</option>
+                <option value="{{vm.vehicleTypes[4]}}">{{vm.vehicleTypes[4]}}</option>
+                <option value="{{vm.vehicleTypes[5]}}">{{vm.vehicleTypes[5]}}</option>
+            </select>
+            <br>
+        </div>
+
+        <!-- CAR ENTRY START  -->
+
+        <span ng-if="vm.vehicle.vehicleType == vm.vehicleTypes[0] || vm.vehicle.vehicleType== vm.vehicleTypes[1]">
+            <div class="form-group">
+                <label class="control-label" for="field_seatsNumber">Seats Number</label>
+                <input type="number" class="form-control" name="seatsNumber" id="field_seatsNumber" ng-model="vm.vehicle.seatsNumber" />
+            </div>
+
+
+
+            <div class="form-group" ng-if="vm.vehicle.vehicleType == vm.vehicleTypes[1]">
+                <label class="control-label" for="field_hasRemovableRoof">Has Removable Roof</label>
+                <input type="checkbox" name="hasRemovableRoof" id="field_hasRemovableRoof" ng-model="vm.vehicle.hasRemovableRoof" />
+            </div>
+
+            <div class="form-group" ng-if="vm.vehicle.vehicleType == vm.vehicleTypes[0]">
+                <label class="control-label" for="field_roofTopCapacity">Roof Top Capacity</label>
+                <input type="number" class="form-control" name="roofTopCapacity" id="field_roofTopCapacity" ng-model="vm.vehicle.roofTopCapacity"
+                />
+            </div>
+
+            <div class="form-group">
+                <label class="control-label" for="field_hasAbs">Has ABS</label>
+                <input type="checkbox" name="hasAbs" id="field_hasAbs" ng-model="vm.vehicle.hasAbs" />
+            </div>
+
+            <div class="form-group">
+                <label class="control-label" for="field_hasEsp">Has ESP</label>
+                <input type="checkbox" name="hasEsp" id="field_hasEsp" ng-model="vm.vehicle.hasEsp" />
+            </div>
+
+            <div class="form-group">
+                <label class="control-label" for="field_hasGlassRoof">Has hasGlassRoof</label>
+                <input type="checkbox" name="hasGlassRoof" id="field_hasGlassRoofp" ng-model="vm.vehicle.hasGlassRoof" />
+            </div>
+
+            <div class="form-group">
+                <label class="control-label" for="field_hasAluWheels">Has hasAluWheels</label>
+                <input type="checkbox" name="hasAluWheels" id="field_hasAluWheels" ng-model="vm.vehicle.hasAluWheels" />
+            </div>
+
+        </span>
+        <!-- CAR ENTRY END -->
+
+        <!-- BUS ENTRY START -->
+        <span ng-if="vm.vehicle.vehicleType == vm.vehicleTypes[2] || vm.vehicle.vehicleType== vm.vehicleTypes[3]">
+            <div class="form-group">
+                <label class="control-label" for="field_seatsSitting">Seats Sitting</label>
+                <input type="number" class="form-control" name="seatsSitting" id="field_seatsSitting" ng-model="vm.vehicle.seatsSitting"
+                />
+            </div>
+            <div class="form-group">
+                <label class="control-label" for="field_seatsStanding">Seats Standing</label>
+                <input type="number" class="form-control" name="seatsStanding" id="field_seatsStanding" ng-model="vm.vehicle.seatsStanding"
+                />
+            </div>
+
+            <!-- CITY BUS -->
+            <div class="form-group" ng-if="vm.vehicle.vehicleType == vm.vehicleTypes[2]">
+                <label class="control-label" for="field_hasWhrist">Has Whrist</label>
+                <input type="checkbox" name="hasWhrist" id="field_hasWhrist" ng-model="vm.vehicle.hasWhrist" />
+            </div>
+
+            <!-- INTERCITY BUS -->
+            <div class="form-group" ng-if="vm.vehicle.vehicleType == vm.vehicleTypes[3]">
+                <label class="control-label" for="field_trunkCapacity">Trunk Capacity</label>
+                <input type="number" class="form-control" name="trunkCapacity" id="field_trunkCapacity" ng-model="vm.vehicle.trunkCapacity"
+                />
+            </div>
+
+        </span>
+        <!-- BUS ENTRY END -->
+
+
+        <!-- TRUCK ENTRY START -->
+        <span ng-if="vm.vehicle.vehicleType == vm.vehicleTypes[4] || vm.vehicle.vehicleType== vm.vehicleTypes[5]">
+
+            <div class="form-group">
+                <label class="control-label" for="field_numberOfAxles">Number Of Axles</label>
+                <input type="number" class="form-control" name="numberOfAxles" id="field_numberOfAxles" ng-model="vm.vehicle.numberOfAxles"
+                    min="2" max="4" />
+                <div ng-show="editForm.numberOfAxles.$invalid">
+                    <p class="help-block" ng-show="editForm.numberOfAxles.$error.min" translate-value-min="2">
+                        This field should be at least 2.
+                    </p>
+                    <p class="help-block" ng-show="editForm.numberOfAxles.$error.max">
+                        This field cannot be more than 4.
+                    </p>
+                    <p class="help-block" ng-show="editForm.numberOfAxles.$error.number">
+                        This field should be a number.
+                    </p>
+                </div>
+            </div>
+
+            <!-- TRUCTOR TRUCK --> 
+            <div class="form-group"  ng-if="vm.vehicle.vehicleType == vm.vehicleTypes[4]" >
+                <label class="control-label" for="field_horsePower">Horse Power</label>
+                <input type="number" class="form-control" name="horsePower" id="field_horsePower"
+                        ng-model="vm.vehicle.horsePower"
+                        />
+            </div>
+
+            <!-- TANK TRUCK --> 
+            <div class="form-group" ng-if="vm.vehicle.vehicleType == vm.vehicleTypes[5]">
+                <label class="control-label" for="field_tankCapacity">Tank Capacity</label>
+                <input type="number" class="form-control" name="tankCapacity" id="field_tankCapacity"
+                        ng-model="vm.vehicle.tankCapacity"
+                        />
+            </div>
+
+        </span>
+        <!-- TRUCK ENTRY END -->
+
+
+
+
+
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;
+            <span>Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;
+            <span>Save</span>
+        </button>
+    </div>
+</form>

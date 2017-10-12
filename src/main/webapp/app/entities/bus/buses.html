@@ -19,17 +19,27 @@
             <thead>
                 <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
                     <th jh-sort-by="id"><span>ID</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="color"><span>Color</span>  <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="manufacturer.name"><span>Manufacturer</span></th>
                     <th jh-sort-by="seatsSitting"><span>Seats Sitting</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="seatsStanding"><span>Seats Standing</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="vehicleType"><span>Bus Type</span>  <span class="glyphicon glyphicon-sort"></span></th>
+                    <th><span>Has Whrist</span></span></th>
+                    <th><span>Trunk Capacity</span></span></th>
                     <th></th>
                 </tr>
             </thead>
             <tbody>
                 <tr ng-repeat="bus in vm.buses track by bus.id">
-                    <td><a ui-sref="bus-detail({id:bus.id})">{{bus.id}}</a></td>
+                    <td>>{{bus.id}}</td>
+                    <td>{{bus.color}}</td>
+                    <td>{{bus.manufacturer.name}}</td>
                     <td>{{bus.seatsSitting}}</td>
                     <td>{{bus.seatsStanding}}</td>
-                    <td class="text-right">
+                    <td>{{bus.vehicleType}}</td>
+                    <td>{{bus.hasWhrist}}</td>
+                    <td>{{bus.trunkCapacity}}</td>
+                    <!--<td class="text-right">
                         <div class="btn-group flex-btn-group-container">
                             <button type="submit"
                                     ui-sref="bus-detail({id:bus.id})"
@@ -50,7 +60,7 @@
                                 <span class="hidden-sm-down"></span>
                             </button>
                         </div>
-                    </td>
+                    </td>-->
                 </tr>
             </tbody>
         </table>

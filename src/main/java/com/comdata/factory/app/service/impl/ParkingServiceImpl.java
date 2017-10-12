@@ -57,8 +57,7 @@ public class ParkingServiceImpl implements ParkingService {
 
 	@Override
 	public Page<Parking> findAll(Pageable pageable) {
-		// TODO Auto-generated method stub
-		return null;
+		return parkingRepository.findAll(pageable);
 	}
 
 
@@ -97,5 +96,11 @@ public class ParkingServiceImpl implements ParkingService {
 		}
 		return false;
 		
+	}
+
+	@Override
+	public Page<Parking> findByParkingId(Integer parkingId, Pageable pageable) {
+		
+		return null;
 	}
 }

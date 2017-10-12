@@ -85,6 +85,13 @@
                           ng-model="vm.car.hasAbs"/>
         </div>
 
+                <div class="form-group">
+            <label for="field_manufacturer">Manufacturer</label>
+            <select class="form-control" id="field_manufacturer" name="manufacturer" ng-model="vm.car.manufacturer" ng-options="manufacturer as manufacturer.name for manufacturer in vm.manufacturers | orderBy:'id' track by manufacturer.id">
+                <option value=""></option>
+            </select>
+        </div>
+
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">

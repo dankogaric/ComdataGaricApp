@@ -3,6 +3,9 @@ package com.comdata.factory.app.service.impl;
 import com.comdata.factory.app.service.VehicleService;
 import com.comdata.factory.app.domain.Vehicle;
 import com.comdata.factory.app.repository.VehicleRepository;
+
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -74,4 +77,10 @@ public class VehicleServiceImpl implements VehicleService{
         log.debug("Request to delete Vehicle : {}", id);
         vehicleRepository.delete(id);
     }
+
+	@Override
+	public Page<Vehicle> findVehiclesByParkingId(Long parkingId, Pageable pageable) {
+		// TODO Auto-generated method stub
+		return vehicleRepository.findByParkingId(parkingId, pageable);
+	}
 }

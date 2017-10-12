@@ -26,6 +26,9 @@ public interface ParkingService {
      *  @return the list of entities
      */
     Page<Parking> findAll(Pageable pageable);
+    
+    
+    Page<Parking> findByParkingId(Integer parkingId, Pageable pageable);
 
     /**
      *  Get the "id" parking.

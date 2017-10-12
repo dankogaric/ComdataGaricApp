@@ -23,11 +23,12 @@
                     <th jh-sort-by="area"><span>Area</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="manufacturer.id"><span>Manufacturer</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="parking.id"><span>Parking</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="vehicleType"><span>Vehicle type</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th></th>
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="vehicle in vm.vehicles track by vehicle.id">
+                <tr ng-repeat="vehicle in vm.vehicles track by vehicle.id ">
                     <td><a ui-sref="vehicle-detail({id:vehicle.id})">{{vehicle.id}}</a></td>
                     <td>{{vehicle.color}}</td>
                     <td>{{vehicle.area}}</td>
@@ -35,6 +36,7 @@
                     <td>
                         {{vehicle.parking.id}}
                     </td>
+                    <td>{{vehicle.vehicleType}}</td>
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">
                             <button type="submit"

@@ -5,6 +5,6 @@
         .module('comdataGaricApp')
         .constant('VERSION', "0.0.1-SNAPSHOT")
         .constant('DEBUG_INFO_ENABLED', false)
-        .constant('BUILD_TIMESTAMP', 1507582299776)
+        .constant('BUILD_TIMESTAMP', 1507820662554)
 ;
 })();

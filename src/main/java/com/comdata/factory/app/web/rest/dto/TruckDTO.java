@@ -2,6 +2,7 @@ package com.comdata.factory.app.web.rest.dto;
 
 import com.comdata.factory.app.domain.Truck;
 import com.comdata.factory.app.domain.TructorTruck;
+import com.comdata.factory.app.domain.enums.VehicleType;
 import com.comdata.factory.app.domain.Manufacturer;
 import com.comdata.factory.app.domain.TankTruck;
 
@@ -21,7 +22,7 @@ public class TruckDTO {
     private Manufacturer manufacturer;
     
     
-    private String truckType;
+    private String vehicleType;
 
     /**
       "seatsNumber": 4,
@@ -45,11 +46,11 @@ public class TruckDTO {
 		this.manufacturer.setName(truckEntity.getManufacturer().getName());
 			
 		if(truckEntity instanceof TructorTruck) {
-			truckType = TRUCK_TYPE_TRUCTOR;
+			this.vehicleType = truckEntity.getVehicleType().toString();
 			this.horsePower = ((TructorTruck)truckEntity).getHorsePower();
 			
 		} else if(truckEntity instanceof TankTruck) {
-			truckType = TRUCK_TYPE_TANK;
+			this.vehicleType = truckEntity.getVehicleType().toString();
 			this.tankCapacity = ((TankTruck)truckEntity).getTankCapacity();
 		}
 		
@@ -58,13 +59,14 @@ public class TruckDTO {
 
 	public Truck convertToTruckEntity () {
 		// determine which type of truck is this
-		if(truckType.equals(TRUCK_TYPE_TRUCTOR)) {
+		if(vehicleType.equals(TRUCK_TYPE_TRUCTOR)) {
 			TructorTruck returnValue = new TructorTruck();
 			returnValue.setId(id);
 			returnValue.setNumberOfAxles(numberOfAxles);
 			returnValue.setHorsePower(horsePower);
 			returnValue.setManufacturer(manufacturer);
 			returnValue.setColor(color);
+			returnValue.setVehicleType(VehicleType.TRUCTOR_TRUCK);
 			return returnValue;
 			
 		} else {
@@ -75,6 +77,7 @@ public class TruckDTO {
 			returnValue.setManufacturer(manufacturer);
 			returnValue.setColor(color);
 			returnValue.setColor(color);
+			returnValue.setVehicleType(VehicleType.TANK_TRUCK);
 			return returnValue;
 		}	
 	}
@@ -96,21 +99,18 @@ public class TruckDTO {
 	}
 
 
-	public String getTruckType() {
-		return truckType;
+
+
+
+
+
+	public String getVehicleType() {
+		return vehicleType;
 	}
 
-
-
-
-
-	public void setTruckType(String truckType) {
-		this.truckType = truckType;
+	public void setVehicleType(String vehicleType) {
+		this.vehicleType = vehicleType;
 	}
-
-
-
-
 
 	public Manufacturer getManufacturer() {
 		return manufacturer;

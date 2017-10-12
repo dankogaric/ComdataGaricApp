@@ -8,6 +8,7 @@ import com.comdata.factory.app.domain.Cabrio;
 import com.comdata.factory.app.domain.Car;
 import com.comdata.factory.app.domain.ClassicCar;
 import com.comdata.factory.app.domain.Manufacturer;
+import com.comdata.factory.app.domain.enums.VehicleType;
 
 public class CarDTO {
 	/**
@@ -38,7 +39,7 @@ public class CarDTO {
     
     private Integer roofTopCapacity;
     
-    private String carType;
+    private String vehicleType;
     
     private Manufacturer manufacturer;
     
@@ -64,11 +65,11 @@ public class CarDTO {
 		this.manufacturer.setName(carEntity.getManufacturer().getName());
 			
 		if(carEntity instanceof ClassicCar) {
-			carType = CAR_TYPE_CLASSIC;
+			this.vehicleType = carEntity.getVehicleType().toString();
 			this.roofTopCapacity = ((ClassicCar)carEntity).getRoofTopCapacity();
 			
 		} else if (carEntity instanceof Cabrio) {
-			carType = CAR_TYPE_CABRIO;
+			this.vehicleType = carEntity.getVehicleType().toString();
 			this.hasRemovableRoof = ((Cabrio)carEntity).isHasRemovableRoof();
 		}
 		
@@ -77,10 +78,11 @@ public class CarDTO {
 
 	public Car convertToCarEntity () {
 		// determine which type of car is this
-		if(carType.equals(CAR_TYPE_CLASSIC)) {
+		if(vehicleType.equals(CAR_TYPE_CLASSIC)) {
 			ClassicCar returnValue = new ClassicCar();
 			returnValue.setId(id);
 			returnValue.setSeatsNumber(seatsNumber);
+			returnValue.setVehicleType(VehicleType.CLASSIC_CAR);
 			AdditionalEquipment addEq = new AdditionalEquipment();
 			addEq.setHasAbs(hasAbs);
 			addEq.setHasAluWheels(hasAluWheels);
@@ -97,6 +99,7 @@ public class CarDTO {
 			Cabrio returnValue = new Cabrio();
 			returnValue.setId(id);
 			returnValue.setSeatsNumber(seatsNumber);
+			returnValue.setVehicleType(VehicleType.CABRIO);
 			AdditionalEquipment addEq = new AdditionalEquipment();
 			addEq.setHasAbs(hasAbs);
 			addEq.setHasAluWheels(hasAluWheels);
@@ -173,31 +176,17 @@ public class CarDTO {
 	}
 
 
-
-
-
-	public String getCarType() {
-		return carType;
+	public String getVehicleType() {
+		return vehicleType;
 	}
 
-
-
-
-
-	public void setCarType(String carType) {
-		this.carType = carType;
+	public void setVehicleType(String vehicleType) {
+		this.vehicleType = vehicleType;
 	}
-
-
-
-
 
 	public Manufacturer getManufacturer() {
 		return manufacturer;
 	}
-
-
-
 
 
 	public void setManufacturer(Manufacturer manufacturer) {
